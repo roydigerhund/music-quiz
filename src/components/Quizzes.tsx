@@ -65,7 +65,7 @@ const Quizzes: React.FunctionComponent = () => {
   const checkAnswer = () => {
     const userAnswer = Object.entries(drops)
       .filter(([_, option]) => !!option)
-      .sort(([a], [b]) => parseInt(b, 10) - parseInt(a, 10))
+      .sort(([a], [b]) => a.localeCompare(b))
       .map(([_, option]) => option.id);
     console.log(drops, userAnswer, quiz.answer);
     const result =

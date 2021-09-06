@@ -1,4 +1,5 @@
 import { Link } from "@reach/router";
+import GamePage from "containers/GamePage";
 import React, { useEffect } from "react";
 
 const IndexPage = () => {
@@ -15,14 +16,26 @@ const IndexPage = () => {
     setGameIsRunning(true);
     const currentUnix = Math.floor(Date.now() / 1000);
     localStorage.setItem("gameStartedAt", currentUnix.toString());
+    // replace with context
+    window.location.href = "/";
   };
 
   return (
-    <div>
+    <GamePage>
       {gameIsRunning ? (
-        <div className="flex flex-col justify-center items-center">
-          <Link to="/rhythmus">Rhythmus</Link>
-          <Link to="/noten">Noten</Link>
+        <div className="flex flex-col sm:flex-row justify-center items-center flex-1">
+          <Link
+            className="flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl"
+            to="/rhythmus"
+          >
+            Rhythmus
+          </Link>
+          <Link
+            className="flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl"
+            to="/noten"
+          >
+            Noten
+          </Link>
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center">
@@ -47,7 +60,7 @@ const IndexPage = () => {
           </button>
         </div>
       )}
-    </div>
+    </GamePage>
   );
 };
 

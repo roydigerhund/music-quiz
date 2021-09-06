@@ -1,10 +1,11 @@
 import Quizzes from "components/Quizzes";
+import GamePage from "containers/GamePage";
 import React from "react";
 
 const NotenPage = () => (
-  <div>
+  <GamePage>
     <Quizzes />
-  </div>
+  </GamePage>
 );
 
 export default NotenPage;

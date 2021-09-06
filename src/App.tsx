@@ -6,7 +6,7 @@ import "./dist.css";
 const App = () => {
   return (
     <Root>
-      <div className="bg-indigo-600 min-h-screen text-white">
+      <div>
         <React.Suspense fallback={<em>Loading...</em>}>
           <Router>
             <Routes path="*" />
