@@ -12,10 +12,7 @@ const Droppable: React.FunctionComponent<Props> = ({ id, children }) => {
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      style={{ width: 120, height: 120, border: "1px dashed gray", ...style }}
-    >
+    <div ref={setNodeRef} className="h-24 flex justify-center items-center border border-dashed border-gray-400" style={style}>
       {children}
     </div>
   );
