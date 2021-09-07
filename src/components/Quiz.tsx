@@ -6,36 +6,15 @@ import {
 import Draggable from "components/Draggable";
 import Droppable from "components/Droppable";
 import React, { useState } from "react";
+import { quizzes, Option } from "../data/quizzes";
 
 type ID = string;
 
-export type Option = { id: ID; name: string };
-
-type Quiz = {
-  options: { id: ID; name: string }[];
-  question: string;
-  answer: ID[];
-};
-
-const noteOptions: Option[] = [
-  { id: "c", name: "C" },
-  { id: "d", name: "D" },
-  { id: "e", name: "E" },
-  { id: "f", name: "F" },
-  { id: "g", name: "G" },
-  { id: "a", name: "A" },
-  { id: "h", name: "H" },
-];
-
-const quiz: Quiz = {
-  options: noteOptions,
-  question: "Was ist die Matz'sche Tonleiter?",
-  answer: ["c", "f", "d", "h"],
-};
-
-const Quizzes: React.FunctionComponent = () => {
+const Quiz: React.FunctionComponent = () => {
   const [drops, setDrops] = useState<Record<ID, Option | null>>({});
   const [success, setSuccess] = useState<boolean | null>(null);
+
+  const quiz = quizzes[0];
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { over, active } = event;
@@ -156,4 +135,4 @@ const Quizzes: React.FunctionComponent = () => {
   );
 };
 
-export default Quizzes;
+export default Quiz;

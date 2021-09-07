@@ -1,6 +1,6 @@
 import React from "react";
 import { useDraggable } from "@dnd-kit/core";
-import { Option } from "./Quizzes";
+import { Option } from "../data/quizzes";
 import { classNames } from "../utils/class-names";
 
 type Props = {
@@ -29,7 +29,7 @@ const Draggable: React.FunctionComponent<Props> = ({
       <div
         ref={setNodeRef}
         className={classNames(
-          "relative bg-white text-indigo-600 font-bold text-3xl rounded-2xl h-24 flex items-center justify-center flex-1 focus:outline-none",
+          "relative bg-white text-indigo-600 font-bold text-3xl rounded-xl h-24 flex items-center justify-center flex-1 focus:outline-none",
           isDragging && "z-10 shadow-xl"
         )}
         style={style}

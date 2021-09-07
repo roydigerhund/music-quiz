@@ -1,3 +1,4 @@
+import { PlayOutline } from "@graywolfai/react-heroicons";
 import { Link } from "@reach/router";
 import GamePage from "containers/GamePage";
 import React, { useEffect } from "react";
@@ -54,9 +55,10 @@ const IndexPage = () => {
           <button
             role="button"
             onClick={startGame}
-            className="mt-12 from-pink-500 to-pink-600 bg-gradient-to-b hover:from-pink-600 hover:to-pink-600 hover:translate-y-0.5 shadow-lg text-white tracking-wide font-semibold py-4 px-8 rounded-lg"
+            className="flex items-center mt-12 from-pink-500 to-pink-600 bg-gradient-to-b hover:from-pink-600 hover:to-pink-600 shadow-lg text-white tracking-wide font-semibold py-4 px-8 rounded-lg"
           >
-            Spiel Starten
+            <PlayOutline className="h-6 w-6 mr-4 -ml-2" />
+            <span>Spiel Starten</span>
           </button>
         </div>
       )}
