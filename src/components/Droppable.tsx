@@ -13,11 +13,11 @@ const Droppable: React.FunctionComponent<Props> = ({ id, children }) => {
     <div
       ref={setNodeRef}
       className={classNames(
-        "box-content h-24 p-1 flex justify-center items-center border-2 border-dashed rounded-2xl",
+        "box-content p-1 m-2 flex justify-center items-center border-2 border-dashed rounded-2xl",
         isOver ? "border-white" : "border-indigo-300"
       )}
     >
-      {children}
+      <div className="h-24 w-24">{children}</div>
     </div>
   );
 };

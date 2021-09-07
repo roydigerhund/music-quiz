@@ -1,5 +1,6 @@
 import { PlayOutline } from "@graywolfai/react-heroicons";
 import { Link } from "@reach/router";
+import Button from "components/Button";
 import GamePage from "containers/GamePage";
 import React, { useEffect } from "react";
 
@@ -52,14 +53,11 @@ const IndexPage = () => {
               Mit viel Liebe für euch gemacht von eurem Lehrer Herr Schmied.
             </h2>
           </div>
-          <button
-            role="button"
+          <Button
             onClick={startGame}
-            className="flex items-center mt-12 from-pink-500 to-pink-600 bg-gradient-to-b hover:from-pink-600 hover:to-pink-600 shadow-lg text-white tracking-wide font-semibold py-4 px-8 rounded-lg"
-          >
-            <PlayOutline className="h-6 w-6 mr-4 -ml-2" />
-            <span>Spiel Starten</span>
-          </button>
+            label="Spiel starten"
+            icon={PlayOutline}
+          />
         </div>
       )}
     </GamePage>

@@ -1,20 +1,40 @@
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import {
-  CheckCircleOutline,
-  XCircleOutline,
+  CursorClickOutline,
+  ThumbDownOutline,
+  ThumbUpOutline,
 } from "@graywolfai/react-heroicons";
 import Draggable from "components/Draggable";
 import Droppable from "components/Droppable";
-import React, { useState } from "react";
-import { quizzes, Option } from "../data/quizzes";
+import randomInteger from "random-int";
+import React, { useEffect, useState } from "react";
+import { Option, QuizType, QuizVariant, quizzes } from "../data/quizzes";
+import Button from "./Button";
 
 type ID = string;
 
-const Quiz: React.FunctionComponent = () => {
+const Quiz = ({ variant }: { variant: QuizVariant }) => {
   const [drops, setDrops] = useState<Record<ID, Option | null>>({});
   const [success, setSuccess] = useState<boolean | null>(null);
+  const [quiz, setQuiz] = useState<QuizType | undefined>();
 
-  const quiz = quizzes[0];
+  const getQuiz = async () => {
+    try {
+      const finishedQuizzesJSON = localStorage.getItem("quiz-success");
+      const finishedQuizzes = await JSON.parse(finishedQuizzesJSON || "[]");
+      const availableQuizzes = quizzes[variant].filter(
+        (quiz) => !finishedQuizzes.includes(quiz.id)
+      );
+      const quizIndexNumber = randomInteger(0, availableQuizzes.length - 1);
+      setQuiz(availableQuizzes[quizIndexNumber]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getQuiz();
+  }, [variant]);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { over, active } = event;
@@ -41,7 +61,7 @@ const Quiz: React.FunctionComponent = () => {
     }
   };
 
-  const checkAnswer = () => {
+  const checkAnswer = async () => {
     const userAnswer = Object.entries(drops)
       .filter(([_, option]) => !!option)
       .sort(([a], [b]) => a.localeCompare(b))
@@ -51,22 +71,36 @@ const Quiz: React.FunctionComponent = () => {
       userAnswer.length === quiz.answer.length &&
       userAnswer.every((value, index) => value === quiz.answer[index]);
     setSuccess(result);
+    if (result) {
+      try {
+        const finishedQuizzesJSON = localStorage.getItem("quiz-success");
+        const finishedQuizzes = await JSON.parse(finishedQuizzesJSON || "[]");
+        if (!finishedQuizzes.includes(quiz.id)) {
+          localStorage.setItem(
+            "quiz-success",
+            JSON.stringify([...finishedQuizzes, quiz.id])
+          );
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
 
-  return (
-    <div className="flex flex-col max-w-3xl mx-auto items-center">
+  return !quiz ? null : (
+    <div className="flex flex-col max-w-4xl mx-auto items-center">
       <DndContext onDragEnd={handleDragEnd}>
         <h1 className="my-24 text-xl text-center font-medium">
           {quiz.question}
         </h1>
-        <div className="w-full grid grid-cols-7 gap-2">
+        <div className="flex flex-wrap">
           {quiz.options.map(({ id, name }) => (
             <Draggable key={id} id={id} option={{ id, name }}>
               {name}
             </Draggable>
           ))}
         </div>
-        <div className="w-full my-16 grid grid-cols-4 gap-2">
+        <div className="flex flex-wrap my-16">
           {Array(quiz.answer.length)
             .fill("")
             .map((_, index) => {
@@ -79,6 +113,7 @@ const Quiz: React.FunctionComponent = () => {
                     <Draggable
                       id={`${dropId}__${childOption.id}`}
                       option={childOption}
+                      dropped={true}
                     >
                       {childOption.name}
                     </Draggable>
@@ -88,19 +123,17 @@ const Quiz: React.FunctionComponent = () => {
             })}
         </div>
         {success === null && (
-          <button
-            type="button"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          <Button
             onClick={checkAnswer}
-          >
-            Antwort überprüfen
-          </button>
+            label="Antwort überprüfen"
+            icon={CursorClickOutline}
+          />
         )}
         {success === true && (
           <div className="rounded-md bg-green-500 p-4">
             <div className="flex">
               <div className="flex-shrink-0">
-                <CheckCircleOutline
+                <ThumbUpOutline
                   className="h-5 w-5 text-white"
                   aria-hidden="true"
                 />
@@ -117,7 +150,7 @@ const Quiz: React.FunctionComponent = () => {
           <div className="rounded-md bg-red-500 p-4">
             <div className="flex">
               <div className="flex-shrink-0">
-                <XCircleOutline
+                <ThumbDownOutline
                   className="h-5 w-5 text-white"
                   aria-hidden="true"
                 />
