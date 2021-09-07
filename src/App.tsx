@@ -10,7 +10,7 @@ const App = () => {
       <GameProvider>
         <React.Suspense
           fallback={
-            <div className="flex justify-center items-center bg-indigo-600 min-h-screen text-2xl font-medium text-white">
+            <div className="flex justify-center items-center bg-indigo-600 min-h-screen text-xl font-bold text-white uppercase tracking-wide">
               Loading…
             </div>
           }

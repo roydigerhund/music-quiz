@@ -4,7 +4,7 @@ import React from 'react';
 import { QuizVariant } from '../data/quizzes';
 
 const RhythmusPage = () => (
-  <GamePage>
+  <GamePage showGoBack>
     <Quiz variant={QuizVariant.RHYTHM} />
   </GamePage>
 );

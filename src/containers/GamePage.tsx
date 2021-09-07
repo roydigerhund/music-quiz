@@ -1,15 +1,17 @@
+import { Link } from '@reach/router';
 import { DateTime } from 'luxon';
 import React from 'react';
 import { useGame } from '../components/contexts/GameContext';
 import Timer from '../components/Timer';
 
-const GamePage: React.FunctionComponent = ({ children }) => {
+const GamePage: React.FunctionComponent<{ showGoBack?: boolean }> = ({ children, showGoBack }) => {
   const { game, exitGame } = useGame();
 
   return (
     <div className="bg-indigo-600 min-h-screen text-white">
       {!!game && (
         <div className="flex items-center justify-between py-3 px-4">
+          {showGoBack && <Link to="/">Zurück zur Übersicht</Link>}
           <div className="text-indigo-100">
             Dein Spiel begann <Timer />
           </div>

@@ -1,5 +1,6 @@
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { CursorClickOutline, ThumbDownOutline, ThumbUpOutline } from '@graywolfai/react-heroicons';
+import { Link } from '@reach/router';
 import randomInteger from 'random-int';
 import React, { useEffect, useState } from 'react';
 import { QuizVariant, quizzes } from '../data/quizzes';
@@ -72,13 +73,15 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
     <div className="flex flex-col max-w-4xl mx-auto items-center">
       <DndContext onDragEnd={handleDragEnd}>
         <h1 className="my-24 text-xl text-center font-medium">{quiz.question}</h1>
-        <div className="flex flex-wrap">
-          {quiz.options.map(({ id, name }) => (
-            <Draggable key={id} id={id} option={{ id, name }}>
-              {name}
-            </Draggable>
-          ))}
-        </div>
+        {success === null && (
+          <div className="flex flex-wrap">
+            {quiz.options.map(({ id, name }) => (
+              <Draggable key={id} id={id} option={{ id, name }}>
+                {name}
+              </Draggable>
+            ))}
+          </div>
+        )}
         <div className="flex flex-wrap my-16">
           {Array(quiz.answer.length)
             .fill('')
@@ -98,7 +101,12 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
             })}
         </div>
         {success === null && (
-          <Button onClick={checkAnswer} label="Antwort überprüfen" leadingIcon={CursorClickOutline} />
+          <Button
+            onClick={checkAnswer}
+            label="Antwort überprüfen"
+            leadingIcon={CursorClickOutline}
+            disabled={Object.entries(drops).filter(([_, option]) => !!option).length !== quiz.answer.length}
+          />
         )}
         {success === true && (
           <div className="rounded-md bg-green-500 p-4">
@@ -124,6 +132,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
             </div>
           </div>
         )}
+        {success !== null && <Link to="/">Zurück zur Übersicht</Link>}
       </DndContext>
     </div>
   );

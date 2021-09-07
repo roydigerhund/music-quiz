@@ -24,6 +24,12 @@ const IndexPage = () => {
           >
             Noten
           </Link>
+          <Link
+            className="flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl"
+            to="/akkorde"
+          >
+            Akkorde
+          </Link>
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center">
