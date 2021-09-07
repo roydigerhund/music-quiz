@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import GamePage from '../containers/GamePage';
 import React, { useEffect } from 'react';
 import { useGame } from '../components/contexts/GameContext';
+import { QuizVariant, quizzes } from '../data/quizzes';
 
 const IndexPage = () => {
   const { game, startGame } = useGame();
@@ -16,19 +17,28 @@ const IndexPage = () => {
             className="flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl"
             to="/rhythmus"
           >
-            Rhythmus
+            Rhythmus{' '}
+            {`${quizzes[QuizVariant.RHYTHM].filter((q) => game.succeededQuizzes.includes(q.id)).length}/${
+              quizzes[QuizVariant.RHYTHM].length
+            }`}
           </Link>
           <Link
             className="flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl"
             to="/noten"
           >
-            Noten
+            Noten{' '}
+            {`${quizzes[QuizVariant.NOTES].filter((q) => game.succeededQuizzes.includes(q.id)).length}/${
+              quizzes[QuizVariant.NOTES].length
+            }`}
           </Link>
           <Link
             className="flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl"
             to="/akkorde"
           >
-            Akkorde
+            Akkorde{' '}
+            {`${quizzes[QuizVariant.CHORDS].filter((q) => game.succeededQuizzes.includes(q.id)).length}/${
+              quizzes[QuizVariant.CHORDS].length
+            }`}
           </Link>
         </div>
       ) : (
