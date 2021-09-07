@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { QuizVariant, quizzes } from '../data/quizzes';
 import { QuizOption, QuizType } from '../types/types';
 import Button from './Button';
+import { useGame } from './contexts/GameContext';
 import Draggable from './Draggable';
 import Droppable from './Droppable';
 
@@ -15,16 +16,12 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   const [success, setSuccess] = useState<boolean | null>(null);
   const [quiz, setQuiz] = useState<QuizType | undefined>();
 
-  const getQuiz = async () => {
-    try {
-      const finishedQuizzesJSON = localStorage.getItem('quiz-success');
-      const finishedQuizzes = await JSON.parse(finishedQuizzesJSON || '[]');
-      const availableQuizzes = quizzes[variant].filter((quiz) => !finishedQuizzes.includes(quiz.id));
-      const quizIndexNumber = randomInteger(0, availableQuizzes.length - 1);
-      setQuiz(availableQuizzes[quizIndexNumber]);
-    } catch (error) {
-      console.error(error);
-    }
+  const { game, addSucceededQuiz } = useGame();
+
+  const getQuiz = () => {
+    const availableQuizzes = quizzes[variant].filter((quiz) => !game?.succeededQuizzes.includes(quiz.id));
+    const quizIndexNumber = randomInteger(0, availableQuizzes.length - 1);
+    setQuiz(availableQuizzes[quizIndexNumber]);
   };
 
   useEffect(() => {
@@ -56,7 +53,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
     }
   };
 
-  const checkAnswer = async () => {
+  const checkAnswer = () => {
     if (!quiz) return;
     const userAnswer = Object.entries(drops)
       .filter(([_, option]) => !!option)
@@ -67,15 +64,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
       userAnswer.length === quiz.answer.length && userAnswer.every((value, index) => value === quiz.answer[index]);
     setSuccess(result);
     if (result) {
-      try {
-        const finishedQuizzesJSON = localStorage.getItem('quiz-success');
-        const finishedQuizzes = await JSON.parse(finishedQuizzesJSON || '[]');
-        if (!finishedQuizzes.includes(quiz.id)) {
-          localStorage.setItem('quiz-success', JSON.stringify([...finishedQuizzes, quiz.id]));
-        }
-      } catch (error) {
-        console.error(error);
-      }
+      addSucceededQuiz(quiz.id);
     }
   };
 

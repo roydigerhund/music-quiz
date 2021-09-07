@@ -1,28 +1,17 @@
-import React, { useEffect } from "react";
-import { DateTime } from "luxon";
+import { DateTime } from 'luxon';
+import React from 'react';
+import { useGame } from '../components/contexts/GameContext';
+import Timer from '../components/Timer';
 
 const GamePage: React.FunctionComponent = ({ children }) => {
-  const [gameStartedAt, setGameStartedAt] = React.useState<number>(0);
-
-  useEffect(() => {
-    const startedAt = localStorage.getItem("gameStartedAt");
-    if (startedAt) {
-      setGameStartedAt(parseInt(startedAt, 10));
-    }
-  }, []);
-
-  const exitGame = () => {
-    localStorage.removeItem("gameStartedAt");
-    localStorage.removeItem("quiz-success");
-    window.location.href = "/";
-  };
+  const { game, exitGame } = useGame();
 
   return (
     <div className="bg-indigo-600 min-h-screen text-white">
-      {!!gameStartedAt && (
+      {!!game && (
         <div className="flex items-center justify-between py-3 px-4">
           <div className="text-indigo-100">
-            Dein Spiel begann {DateTime.fromSeconds(gameStartedAt).toRelative()}
+            Dein Spiel begann <Timer />
           </div>
           <button
             role="button"
