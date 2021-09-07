@@ -1,7 +1,7 @@
 import { PlayOutline } from "@graywolfai/react-heroicons";
 import { Link } from "@reach/router";
-import Button from "components/Button";
-import GamePage from "containers/GamePage";
+import Button from "../components/Button";
+import GamePage from "../containers/GamePage";
 import React, { useEffect } from "react";
 
 const IndexPage = () => {
@@ -56,7 +56,7 @@ const IndexPage = () => {
           <Button
             onClick={startGame}
             label="Spiel starten"
-            icon={PlayOutline}
+            leadingIcon={PlayOutline}
           />
         </div>
       )}

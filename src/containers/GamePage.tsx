@@ -13,6 +13,7 @@ const GamePage: React.FunctionComponent = ({ children }) => {
 
   const exitGame = () => {
     localStorage.removeItem("gameStartedAt");
+    localStorage.removeItem("quiz-success");
     window.location.href = "/";
   };
 

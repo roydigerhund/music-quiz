@@ -1,5 +1,5 @@
-import Quiz from "components/Quiz";
-import GamePage from "containers/GamePage";
+import Quiz from "../components/Quiz";
+import GamePage from "../containers/GamePage";
 import React from "react";
 import { QuizVariant } from "../data/quizzes";
 

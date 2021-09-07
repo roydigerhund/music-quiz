@@ -1,4 +1,3 @@
-import axios from "axios";
 import path from "path";
 
 // Typescript support in static.config.js is not yet supported, but is coming in a future update!
