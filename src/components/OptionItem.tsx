@@ -13,7 +13,8 @@ const OptionItem = ({ option, position, isCloned }: Props) => {
     <div
       className={classNames(
         'w-full h-full bg-white text-indigo-600 font-bold text-3xl rounded-xl flex items-center justify-center select-none',
-        position === OptionPosition.DRAGGING && 'z-10 shadow-xl cursor-[grabbing]',
+        position === OptionPosition.DRAGGING && 'z-10 shadow-xl',
+        position === OptionPosition.DRAGGING ? 'cursor-[grabbing]' : 'cursor-[grab]',
         isCloned && 'hidden',
       )}
     >
