@@ -17,7 +17,7 @@ const Droppable: React.FunctionComponent<Props> = ({ id, children }) => {
         isOver ? "border-white" : "border-indigo-300"
       )}
     >
-      <div className="h-24 w-24">{children}</div>
+      <div className="h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24">{children}</div>
     </div>
   );
 };

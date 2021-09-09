@@ -17,7 +17,7 @@ const Button = ({ onClick, label, leadingIcon, disabled }: Props) => {
       role="button"
       onClick={onClick}
       className={classNames(
-        'flex items-center mt-12 shadow-lg text-white tracking-wide font-semibold py-4 px-8 rounded-full border-b-4 hover:border-b-2 hover:translate-y-[2px] transition-all transform-gpu',
+        'flex items-center shadow-lg text-white tracking-wide font-semibold py-4 px-8 rounded-full border-b-4 hover:border-b-2 hover:translate-y-[2px] transition-all transform-gpu',
         disabled ? 'pointer-events-none bg-gray-500 border-gray-700' : 'bg-pink-500 hover:bg-pink-600 border-pink-700'
       )}
     >

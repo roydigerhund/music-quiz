@@ -10,10 +10,10 @@ const GamePage: React.FunctionComponent<{ showGoBack?: boolean }> = ({ children,
   return (
     <div className="bg-indigo-600 min-h-screen text-white">
       {!!game && (
-        <div className="flex items-center justify-between py-3 px-4">
-          {showGoBack && <Link to="/">Zurück zur Übersicht</Link>}
+        <div className="flex items-center justify-between py-3 px-4 bg-indigo-800">
+          {showGoBack && <Link to="/">BACK</Link>}
           <div className="text-indigo-100">
-            Dein Spiel begann <Timer />
+            <Timer />
           </div>
           <button
             role="button"

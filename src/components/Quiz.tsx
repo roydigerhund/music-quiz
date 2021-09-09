@@ -89,15 +89,15 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   return !quiz ? null : (
     <div className="flex flex-col max-w-4xl mx-auto items-center">
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
-        <h1 className="my-24 text-xl text-center font-medium">{quiz.question}</h1>
+        <h1 className="my-8 sm:my-12 md:my-16 text-xl text-center font-medium">{quiz.question}</h1>
         {success === null && (
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap justify-center">
             {quiz.options.map(({ id, name }) => (
               <Draggable key={id} id={id} option={{ id, name }} position={OptionPosition.POOL} />
             ))}
           </div>
         )}
-        <div className="flex flex-wrap my-16">
+        <div className="flex flex-wrap justify-center my-8 sm:my-12 md:my-16">
           {Array(quiz.answer.length)
             .fill('')
             .map((_, index) => {
@@ -117,7 +117,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
               );
             })}
         </div>
-        <DragOverlay dropAnimation={null}>
+        <DragOverlay dropAnimation={null} zIndex={100}>
           {activeOption ? <OptionItem option={activeOption} position={OptionPosition.DRAGGING} /> : null}
         </DragOverlay>
         {success === null && (

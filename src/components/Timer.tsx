@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import { DateTime, Duration } from 'luxon';
 import React, { useEffect } from 'react';
 import { useGame } from '../components/contexts/GameContext';
 
@@ -7,7 +7,10 @@ const Timer = () => {
   const { game } = useGame();
 
   const setTime = () => {
-    const datetime = game && DateTime.fromSeconds(game.startedAt).toRelative();
+    const currentUnix = Math.floor(Date.now() / 1000);
+    const duration = game && currentUnix - game.startedAt;
+    const format = duration && duration >= 60 * 60 ? 'hh:mm:ss' : 'mm:ss';
+    const datetime = duration && Duration.fromObject({seconds: duration}).toFormat(format);
     if (typeof datetime === 'string') {
       setStartedAt(datetime);
     }
