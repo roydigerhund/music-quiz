@@ -9,8 +9,8 @@ const Timer = () => {
   const setTime = () => {
     const currentUnix = Math.floor(Date.now() / 1000);
     const duration = game && currentUnix - game.startedAt;
-    const format = duration && duration >= 60 * 60 ? 'hh:mm:ss' : 'mm:ss';
-    const datetime = duration && Duration.fromObject({seconds: duration}).toFormat(format);
+    const format = duration !== undefined && duration >= 60 * 60 ? 'hh:mm:ss' : 'mm:ss';
+    const datetime = duration !== undefined && Duration.fromObject({seconds: duration}).toFormat(format);
     if (typeof datetime === 'string') {
       setStartedAt(datetime);
     }
