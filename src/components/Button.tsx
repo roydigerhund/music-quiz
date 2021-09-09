@@ -1,4 +1,4 @@
-import { SVGIcon } from '../types/types';
+import { SVGIcon } from '../types/types-and-enums';
 import React from 'react';
 import { classNames } from '../utils/class-names';
 

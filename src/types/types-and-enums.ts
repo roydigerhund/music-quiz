@@ -22,3 +22,9 @@ export type QuizType = {
   answer: OptionID[];
   variant: QuizVariant;
 };
+
+export enum OptionPosition {
+  POOL = 'POOL',
+  ANSWER = 'ANSWER',
+  DRAGGING = 'DRAGGING',
+}

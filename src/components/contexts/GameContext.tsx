@@ -1,6 +1,6 @@
 import { navigate } from '@reach/router';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { ID } from '../../types/types';
+import { ID } from '../../types/types-and-enums';
 import { isNotSSR } from '../../utils/ssr';
 
 type Game = {

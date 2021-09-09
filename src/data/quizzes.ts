@@ -1,4 +1,4 @@
-import { QuizOption, QuizType } from '../types/types';
+import { QuizOption, QuizType } from '../types/types-and-enums';
 
 export enum NotesEnum {
   C = 'C',

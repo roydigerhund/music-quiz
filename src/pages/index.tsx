@@ -1,10 +1,11 @@
-import { PlayOutline } from '@graywolfai/react-heroicons';
+import { MusicNoteOutline, PlayOutline } from '@graywolfai/react-heroicons';
 import { Link } from '@reach/router';
 import Button from '../components/Button';
 import GamePage from '../containers/GamePage';
 import React, { useEffect } from 'react';
 import { useGame } from '../components/contexts/GameContext';
 import { QuizVariant, quizzes } from '../data/quizzes';
+import { classNames } from '../utils/class-names';
 
 const IndexPage = () => {
   const { game, startGame } = useGame();
@@ -14,7 +15,10 @@ const IndexPage = () => {
       {!!game ? (
         <div className="flex flex-col sm:flex-row justify-center items-center flex-1">
           <Link
-            className="flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl"
+            className={classNames(
+              'flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl',
+              quizzes[QuizVariant.RHYTHM].every((q) => game.succeededQuizzes.includes(q.id)) && 'pointer-events-none opacity-50',
+            )}
             to="/rhythmus"
           >
             Rhythmus{' '}
@@ -23,7 +27,10 @@ const IndexPage = () => {
             }`}
           </Link>
           <Link
-            className="flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl"
+            className={classNames(
+              'flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl',
+              quizzes[QuizVariant.NOTES].every((q) => game.succeededQuizzes.includes(q.id)) && 'pointer-events-none opacity-50',
+            )}
             to="/noten"
           >
             Noten{' '}
@@ -32,7 +39,10 @@ const IndexPage = () => {
             }`}
           </Link>
           <Link
-            className="flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl"
+            className={classNames(
+              'flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl',
+              quizzes[QuizVariant.CHORDS].every((q) => game.succeededQuizzes.includes(q.id)) && 'pointer-events-none opacity-50',
+            )}
             to="/akkorde"
           >
             Akkorde{' '}
@@ -50,7 +60,7 @@ const IndexPage = () => {
               Mit viel Liebe für euch gemacht von eurem Lehrer Herr Schmied.
             </h2>
           </div>
-          <Button onClick={startGame} label="Spiel starten" leadingIcon={PlayOutline} />
+          <Button onClick={startGame} label="Spiel starten" leadingIcon={MusicNoteOutline} />
         </div>
       )}
     </GamePage>

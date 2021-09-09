@@ -1,14 +1,24 @@
-import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
 import { CursorClickOutline, ThumbDownOutline, ThumbUpOutline } from '@graywolfai/react-heroicons';
 import { Link } from '@reach/router';
 import randomInteger from 'random-int';
 import React, { useEffect, useState } from 'react';
 import { QuizVariant, quizzes } from '../data/quizzes';
-import { QuizOption, QuizType } from '../types/types';
+import { OptionID, OptionPosition, QuizOption, QuizType } from '../types/types-and-enums';
 import Button from './Button';
 import { useGame } from './contexts/GameContext';
 import Draggable from './Draggable';
 import Droppable from './Droppable';
+import OptionItem from './OptionItem';
 
 type ID = string;
 
@@ -16,6 +26,8 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   const [drops, setDrops] = useState<Record<ID, QuizOption | null>>({});
   const [success, setSuccess] = useState<boolean | null>(null);
   const [quiz, setQuiz] = useState<QuizType | undefined>();
+  const [activeOption, setActiveOption] = useState<QuizOption | null>(null);
+  const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}));
 
   const { game, addSucceededQuiz } = useGame();
 
@@ -28,6 +40,10 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   useEffect(() => {
     getQuiz();
   }, [variant]);
+
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveOption(event.active.data.current as QuizOption);
+  };
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { over, active } = event;
@@ -52,6 +68,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
     } else {
       // do nothing
     }
+    setActiveOption(null);
   };
 
   const checkAnswer = () => {
@@ -71,14 +88,12 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
 
   return !quiz ? null : (
     <div className="flex flex-col max-w-4xl mx-auto items-center">
-      <DndContext onDragEnd={handleDragEnd}>
+      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
         <h1 className="my-24 text-xl text-center font-medium">{quiz.question}</h1>
         {success === null && (
           <div className="flex flex-wrap">
             {quiz.options.map(({ id, name }) => (
-              <Draggable key={id} id={id} option={{ id, name }}>
-                {name}
-              </Draggable>
+              <Draggable key={id} id={id} option={{ id, name }} position={OptionPosition.POOL} />
             ))}
           </div>
         )}
@@ -92,14 +107,19 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
               return (
                 <Droppable key={dropId} id={dropId}>
                   {childOption && (
-                    <Draggable id={`${dropId}__${childOption.id}`} option={childOption} dropped={true}>
-                      {childOption.name}
-                    </Draggable>
+                    <Draggable
+                      id={`${dropId}__${childOption.id}`}
+                      option={childOption}
+                      position={OptionPosition.ANSWER}
+                    />
                   )}
                 </Droppable>
               );
             })}
         </div>
+        <DragOverlay dropAnimation={null}>
+          {activeOption ? <OptionItem option={activeOption} position={OptionPosition.DRAGGING} /> : null}
+        </DragOverlay>
         {success === null && (
           <Button
             onClick={checkAnswer}
