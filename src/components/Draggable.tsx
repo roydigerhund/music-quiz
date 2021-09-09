@@ -18,7 +18,16 @@ const Draggable = ({ id, option, position }: Props) => {
 
   return (
     <div className={classNames('rounded-2xl h-24 w-24 bg-indigo-700', position === OptionPosition.POOL && 'm-2')}>
-      <div ref={setNodeRef} {...listeners} {...attributes} className="w-full h-full focus:outline-none">
+      <div
+        ref={setNodeRef}
+        {...listeners}
+        {...attributes}
+        className={classNames(
+          'w-full h-full focus:outline-none',
+          position === OptionPosition.DRAGGING ? 'cursor-[grabbing]' : 'cursor-[grab]',
+        )}
+        style={{ touchAction: 'none' }}
+      >
         <OptionItem option={option} position={position} isCloned={isDragging} />
       </div>
     </div>

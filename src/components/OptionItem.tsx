@@ -12,9 +12,9 @@ const OptionItem = ({ option, position, isCloned }: Props) => {
   return (
     <div
       className={classNames(
-        'w-full h-full bg-white text-indigo-600 font-bold text-3xl rounded-xl flex items-center justify-center',
-        position === OptionPosition.DRAGGING && 'z-10 shadow-xl',
-        isCloned && 'opacity-0',
+        'w-full h-full bg-white text-indigo-600 font-bold text-3xl rounded-xl flex items-center justify-center select-none',
+        position === OptionPosition.DRAGGING && 'z-10 shadow-xl cursor-[grabbing]',
+        isCloned && 'hidden',
       )}
     >
       {option.name}
