@@ -4,3 +4,4 @@ tmp
 */.DS_Store
 src/dist.css
 artifacts/**/*
+artifacts
