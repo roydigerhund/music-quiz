@@ -1,7 +1,7 @@
 dist
 node_modules
 tmp
-*/.DS_Store
+**/.DS_Store
 src/dist.css
 artifacts/**/*
 artifacts

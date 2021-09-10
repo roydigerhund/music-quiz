@@ -12,8 +12,8 @@ import { CursorClickOutline, ThumbDownOutline, ThumbUpOutline } from '@graywolfa
 import { Link } from '@reach/router';
 import randomInteger from 'random-int';
 import React, { useEffect, useState } from 'react';
-import { QuizVariant, quizzes } from '../data/quizzes';
-import { OptionID, OptionPosition, QuizOption, QuizType } from '../types/types-and-enums';
+import { quizOptions, quizzes } from '../data/quizzes';
+import { OptionPosition, QuizOption, QuizType, QuizVariant } from '../types/types-and-enums';
 import Button from './Button';
 import { useGame } from './contexts/GameContext';
 import Draggable from './Draggable';
@@ -21,6 +21,24 @@ import Droppable from './Droppable';
 import OptionItem from './OptionItem';
 
 type ID = string;
+
+const gridCols: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-2',
+  3: 'grid-cols-3',
+  4: 'grid-cols-4',
+  5: 'grid-cols-5',
+  6: 'grid-cols-3 sm:grid-cols-6',
+  7: 'grid-cols-4 sm:grid-cols-7',
+  8: 'grid-cols-4',
+  9: 'grid-cols-5',
+  10: 'grid-cols-5',
+  11: 'grid-cols-4 sm:grid-cols-6',
+  12: 'grid-cols-4 sm:grid-cols-6',
+  13: 'grid-cols-5 sm:grid-cols-7',
+  14: 'grid-cols-5 sm:grid-cols-7',
+  15: 'grid-cols-5',
+};
 
 const Quiz = ({ variant }: { variant: QuizVariant }) => {
   const [drops, setDrops] = useState<Record<ID, QuizOption | null>>({});
@@ -87,17 +105,17 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   };
 
   return !quiz ? null : (
-    <div className="flex flex-col max-w-4xl mx-auto items-center">
+    <div className="flex flex-col mx-auto px-3 sm:px-4 items-center">
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
         <h1 className="my-8 sm:my-12 md:my-16 text-xl text-center font-medium">{quiz.question}</h1>
         {success === null && (
-          <div className="flex flex-wrap justify-center">
-            {quiz.options.map(({ id, name }) => (
-              <Draggable key={id} id={id} option={{ id, name }} position={OptionPosition.POOL} />
+          <div className={`grid gap-3 sm:gap-4 ${gridCols[quizOptions[quiz.variant].length]}`}>
+            {quizOptions[quiz.variant].map((option) => (
+              <Draggable key={option.id} id={option.id} option={option} position={OptionPosition.POOL} />
             ))}
           </div>
         )}
-        <div className="flex flex-wrap justify-center my-8 sm:my-12 md:my-16">
+        <div className={`grid gap-3 sm:gap-4 ${gridCols[quiz.answer.length]} my-8 sm:my-12 md:my-16`}>
           {Array(quiz.answer.length)
             .fill('')
             .map((_, index) => {
@@ -105,7 +123,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
               const childOption = drops[dropId];
 
               return (
-                <Droppable key={dropId} id={dropId}>
+                <Droppable key={dropId} id={dropId} index={index}>
                   {childOption && (
                     <Draggable
                       id={`${dropId}__${childOption.id}`}

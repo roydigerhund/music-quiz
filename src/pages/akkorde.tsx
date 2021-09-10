@@ -1,7 +1,7 @@
 import Quiz from "../components/Quiz";
 import GamePage from "../containers/GamePage";
 import React from "react";
-import { QuizVariant } from "../data/quizzes";
+import { QuizVariant } from "../types/types-and-enums";
 
 const AkkordePage = () => (
   <GamePage showGoBack>

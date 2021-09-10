@@ -1,10 +1,11 @@
-import { MusicNoteOutline, PlayOutline } from '@graywolfai/react-heroicons';
+import { MusicNoteOutline } from '@graywolfai/react-heroicons';
 import { Link } from '@reach/router';
+import React from 'react';
 import Button from '../components/Button';
-import GamePage from '../containers/GamePage';
-import React, { useEffect } from 'react';
 import { useGame } from '../components/contexts/GameContext';
-import { QuizVariant, quizzes } from '../data/quizzes';
+import GamePage from '../containers/GamePage';
+import { quizzes } from '../data/quizzes';
+import { QuizVariant } from '../types/types-and-enums';
 import { classNames } from '../utils/class-names';
 
 const IndexPage = () => {
@@ -57,7 +58,7 @@ const IndexPage = () => {
           <div className="text-center mt-8 mb-10 px-4">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">Lustiges Musik&nbsp;Quiz</h1>
             <h2 className="max-w-xs mx-auto mt-4 md:mt-8 text-md sm:text-lg md:text-xl font-light text-indigo-200">
-              Mit viel Liebe für euch gemacht von eurem Lehrer Herr Schmied.
+              Mit viel Liebe für euch gemacht von eurem Lehrer Herr Schmid.
             </h2>
           </div>
           <Button onClick={startGame} label="Spiel starten" leadingIcon={MusicNoteOutline} />
