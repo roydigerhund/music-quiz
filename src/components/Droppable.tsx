@@ -14,7 +14,7 @@ const Droppable: React.FunctionComponent<Props> = ({ id, index, children }) => {
     <div
       ref={setNodeRef}
       className={classNames(
-        'box-content p-1 flex justify-center items-center border-2 border-dashed rounded-2xl',
+        'box-content p-1 flex justify-center items-center border-2 border-dashed rounded-2xl select-none',
         isOver ? 'border-white' : 'border-indigo-300',
       )}
     >

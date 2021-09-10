@@ -105,7 +105,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   };
 
   return !quiz ? null : (
-    <div className="flex flex-col mx-auto px-3 sm:px-4 items-center">
+    <div className="flex flex-col mx-auto px-3 sm:px-4 mb-12 items-center">
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
         <h1 className="my-8 sm:my-12 md:my-16 text-xl text-center font-medium">{quiz.question}</h1>
         {success === null && (
@@ -170,7 +170,14 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
             </div>
           </div>
         )}
-        {success !== null && <Link to="/">Zurück zur Übersicht</Link>}
+        {success !== null && (
+          <Link
+            className="mt-12 flex items-center shadow-lg text-white tracking-wide font-semibold py-4 px-8 rounded-full border-b-4 hover:border-b-2 hover:translate-y-[2px] transition-all transform-gpu bg-pink-500 hover:bg-pink-600 border-pink-700"
+            to="/"
+          >
+            Zurück zur Übersicht
+          </Link>
+        )}
       </DndContext>
     </div>
   );

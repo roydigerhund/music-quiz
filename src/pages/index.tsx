@@ -14,10 +14,10 @@ const IndexPage = () => {
   return (
     <GamePage>
       {!!game ? (
-        <div className="flex flex-col sm:flex-row justify-center items-center flex-1">
+        <div className="grid sm:gap-3 gap-4 sm:grid-cols-3 mx-auto max-w-3xl my-8 sm:px-3 px-4">
           <Link
             className={classNames(
-              'flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl',
+              'flex justify-center items-center h-24 xxs:h-32 sm:h-48 bg-pink-700 border-2 border-pink-500 hover:bg-pink-600 hover:border-pink-400 rounded-2xl',
               quizzes[QuizVariant.RHYTHM].every((q) => game.succeededQuizzes.includes(q.id)) && 'pointer-events-none opacity-50',
             )}
             to="/rhythmus"
@@ -29,7 +29,7 @@ const IndexPage = () => {
           </Link>
           <Link
             className={classNames(
-              'flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl',
+              'flex justify-center items-center h-24 xxs:h-32 sm:h-48 bg-pink-700 border-2 border-pink-500 hover:bg-pink-600 hover:border-pink-400 rounded-2xl',
               quizzes[QuizVariant.NOTES].every((q) => game.succeededQuizzes.includes(q.id)) && 'pointer-events-none opacity-50',
             )}
             to="/noten"
@@ -41,7 +41,7 @@ const IndexPage = () => {
           </Link>
           <Link
             className={classNames(
-              'flex justify-center items-center m-4 w-64 h-64 bg-indigo-700 border-2 border-indigo-500 hover:bg-indigo-800 rounded-2xl',
+              'flex justify-center items-center h-24 xxs:h-32 sm:h-48 bg-pink-700 border-2 border-pink-500 hover:bg-pink-600 hover:border-pink-400 rounded-2xl',
               quizzes[QuizVariant.CHORDS].every((q) => game.succeededQuizzes.includes(q.id)) && 'pointer-events-none opacity-50',
             )}
             to="/akkorde"
