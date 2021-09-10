@@ -5,7 +5,7 @@
     "css": "npx tailwindcss -i ./src/app.css -o ./src/dist.css --watch",
     "start": "react-static start",
     "stage": "react-static build --staging",
-    "build": "NODE_ENV=production npx tailwindcss -i ./src/app.css -o ./src/dist.css --minify && react-static build",
+    "build": "NODE_ENV=production npx tailwindcss -i ./src/app.css -o ./src/dist.css --minify && react-static build && workbox generateSW",
     "bundle": "react-static bundle",
     "export": "react-static export",
     "serve": "serve dist -p 3000 -s"
@@ -24,7 +24,8 @@
     "react-static-plugin-reach-router": "^7.5.1",
     "react-static-plugin-sitemap": "^7.5.1",
     "react-static-plugin-source-filesystem": "^7.5.1",
-    "react-static-plugin-typescript": "^7.5.1"
+    "react-static-plugin-typescript": "^7.5.1",
+    "workbox-cli": "^6.3.0"
   },
   "devDependencies": {
     "@types/luxon": "^2.0.3",
