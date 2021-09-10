@@ -54,7 +54,7 @@ const IndexPage = () => {
       ) : (
         <div className="flex flex-col justify-center items-center">
           <img src="/images/intro-bg.png" className="max-w-[500px] w-full h-auto" />
-          <div className="text-center mt-8 mb-10">
+          <div className="text-center mt-8 mb-10 px-4">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">Lustiges Musik&nbsp;Quiz</h1>
             <h2 className="max-w-xs mx-auto mt-4 md:mt-8 text-md sm:text-lg md:text-xl font-light text-indigo-200">
               Mit viel Liebe für euch gemacht von eurem Lehrer Herr Schmied.

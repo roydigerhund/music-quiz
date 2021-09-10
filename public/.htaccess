@@ -164,12 +164,3 @@ RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
   </filesMatch>
 </ifModule>
 
-# BEGIN Everything to index.html
-RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.html$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
-# END Everything to index.html
-
