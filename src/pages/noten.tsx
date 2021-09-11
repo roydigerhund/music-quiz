@@ -4,7 +4,7 @@ import React from "react";
 import { QuizVariant } from "../types/types-and-enums";
 
 const NotenPage = () => (
-  <GamePage showGoBack>
+  <GamePage>
     <Quiz variant={QuizVariant.NOTES} />
   </GamePage>
 );

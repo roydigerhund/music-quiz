@@ -7,10 +7,7 @@ const Timer = () => {
   const { game } = useGame();
 
   const setTime = () => {
-    const currentUnix = Math.floor(Date.now() / 1000);
-    const duration = game && currentUnix - game.startedAt;
-    const format = duration !== undefined && duration >= 60 * 60 ? 'hh:mm:ss' : 'mm:ss';
-    const datetime = duration !== undefined && Duration.fromObject({seconds: duration}).toFormat(format);
+    const datetime = game && DateTime.fromSeconds(game.startedAt).toRelative();
     if (typeof datetime === 'string') {
       setStartedAt(datetime);
     }
@@ -18,9 +15,9 @@ const Timer = () => {
 
   useEffect(() => {
     setTime();
-    
+
     const timer = setInterval(() => {
-      setTime()
+      setTime();
     }, 1000);
 
     return () => {

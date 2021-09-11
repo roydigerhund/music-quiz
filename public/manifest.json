@@ -2,7 +2,7 @@
   "name": "Lustiges Musik Quiz",
   "short_name": "Musik Quiz",
   "start_url": "/",
-  "orientation": "landscape-primary",
+  "orientation": "any",
   "theme_color": "#7624b1",
   "background_color": "#7624b1",
   "display": "standalone",

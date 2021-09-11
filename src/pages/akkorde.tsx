@@ -4,7 +4,7 @@ import React from "react";
 import { QuizVariant } from "../types/types-and-enums";
 
 const AkkordePage = () => (
-  <GamePage showGoBack>
+  <GamePage>
     <Quiz variant={QuizVariant.CHORDS} />
   </GamePage>
 );

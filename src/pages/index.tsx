@@ -2,55 +2,60 @@ import { MusicNoteOutline } from '@graywolfai/react-heroicons';
 import { Link } from '@reach/router';
 import React from 'react';
 import Button from '../components/Button';
-import { useGame } from '../components/contexts/GameContext';
+import { Game, useGame } from '../components/contexts/GameContext';
+import Timer from '../components/Timer';
 import GamePage from '../containers/GamePage';
-import { quizzes } from '../data/quizzes';
+import { quizVariants, quizzes } from '../data/quizzes';
 import { QuizVariant } from '../types/types-and-enums';
 import { classNames } from '../utils/class-names';
 
+const QuizVariantCard = ({ variant, game }: { variant: QuizVariant; game: Game }) => {
+  return (
+    <Link
+      className={classNames(
+        'flex flex-col space-y-4 justify-center items-center shadow-lg text-white tracking-wide font-semibold h-24 xxs:h-32 sm:h-48 px-8 rounded-3xl border-b-4 hover:border-b-2 hover:translate-y-[2px] transition-all transform-gpu',
+        quizzes[variant].every((q) => game.succeededQuizzes.includes(q.id))
+          ? 'pointer-events-none bg-gray-500 border-gray-700'
+          : 'bg-pink-500 hover:bg-pink-600 border-pink-700',
+      )}
+      to={quizVariants[variant].path}
+    >
+      <img src={`/svgs/${quizVariants[variant].iconPath}`} className="h-12 w-12" alt={quizVariants[variant].title} />
+      <span>{`${quizzes[variant].filter((q) => game.succeededQuizzes.includes(q.id)).length}/${
+        quizzes[variant].length
+      }`}</span>
+    </Link>
+  );
+};
+
 const IndexPage = () => {
-  const { game, startGame } = useGame();
+  const { game, startGame, exitGame } = useGame();
 
   return (
     <GamePage>
       {!!game ? (
-        <div className="grid sm:gap-3 gap-4 sm:grid-cols-3 mx-auto max-w-3xl my-8 sm:px-3 px-4">
-          <Link
-            className={classNames(
-              'flex justify-center items-center h-24 xxs:h-32 sm:h-48 bg-pink-700 border-2 border-pink-500 hover:bg-pink-600 hover:border-pink-400 rounded-2xl',
-              quizzes[QuizVariant.RHYTHM].every((q) => game.succeededQuizzes.includes(q.id)) && 'pointer-events-none opacity-50',
-            )}
-            to="/rhythmus"
-          >
-            Rhythmus{' '}
-            {`${quizzes[QuizVariant.RHYTHM].filter((q) => game.succeededQuizzes.includes(q.id)).length}/${
-              quizzes[QuizVariant.RHYTHM].length
-            }`}
-          </Link>
-          <Link
-            className={classNames(
-              'flex justify-center items-center h-24 xxs:h-32 sm:h-48 bg-pink-700 border-2 border-pink-500 hover:bg-pink-600 hover:border-pink-400 rounded-2xl',
-              quizzes[QuizVariant.NOTES].every((q) => game.succeededQuizzes.includes(q.id)) && 'pointer-events-none opacity-50',
-            )}
-            to="/noten"
-          >
-            Noten{' '}
-            {`${quizzes[QuizVariant.NOTES].filter((q) => game.succeededQuizzes.includes(q.id)).length}/${
-              quizzes[QuizVariant.NOTES].length
-            }`}
-          </Link>
-          <Link
-            className={classNames(
-              'flex justify-center items-center h-24 xxs:h-32 sm:h-48 bg-pink-700 border-2 border-pink-500 hover:bg-pink-600 hover:border-pink-400 rounded-2xl',
-              quizzes[QuizVariant.CHORDS].every((q) => game.succeededQuizzes.includes(q.id)) && 'pointer-events-none opacity-50',
-            )}
-            to="/akkorde"
-          >
-            Akkorde{' '}
-            {`${quizzes[QuizVariant.CHORDS].filter((q) => game.succeededQuizzes.includes(q.id)).length}/${
-              quizzes[QuizVariant.CHORDS].length
-            }`}
-          </Link>
+        <div className="mt-8 sm:px-3 px-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-center">Lustiges Musik&nbsp;Quiz</h1>
+          <div className="grid sm:gap-3 gap-4 sm:grid-cols-3 mx-auto max-w-3xl my-8">
+            <QuizVariantCard variant={QuizVariant.NOTES} game={game} />
+            <QuizVariantCard variant={QuizVariant.RHYTHM} game={game} />
+            <QuizVariantCard variant={QuizVariant.CHORDS} game={game} />
+          </div>
+
+          {!!game && (
+            <div className="py-3 space-y-6 text-center">
+              <div className="text-indigo-100">
+                Das Spiel wurde <Timer /> begonnen.
+              </div>
+              <button
+                role="button"
+                onClick={exitGame}
+                className="bg-indigo-800 text-indigo-100 hover:bg-indigo-900 hover:text-white py-2 px-4 rounded-lg text-sm tracking-wide"
+              >
+                Spiel Beenden
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center">

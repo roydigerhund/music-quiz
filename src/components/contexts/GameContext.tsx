@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ID } from '../../types/types-and-enums';
 import { isNotSSR } from '../../utils/ssr';
 
-type Game = {
+export type Game = {
   startedAt: number;
   succeededQuizzes: ID[];
 };
