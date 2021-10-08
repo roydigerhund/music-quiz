@@ -57,21 +57,28 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
     {
       id: 'r-1',
       question: 'Erster Rhythums',
-      answer: ['NOTE_1_1', 'NOTE_1_2', 'NOTE_1_8', 'NOTE_1_4'],
+      answer: ['NOTE_1_1', 'PAUSE_1_1', 'NOTE_1_1', 'PAUSE_1_1'],
       variant: QuizVariant.RHYTHM,
     },
     {
       id: 'r-2',
       question: 'Zweiter Rhythmus',
-      answer: ['NOTE_1_1', 'NOTE_1_2', 'NOTE_1_4', 'NOTE_1_4'],
+      answer: ['NOTE_1_2', 'PAUSE_1_2', 'NOTE_1_2', 'PAUSE_1_2'],
       variant: QuizVariant.RHYTHM,
     },
     {
       id: 'r-3',
       question: 'Dritter Rhythmus',
-      answer: ['PAUSE_1_1', 'NOTE_1_2', 'NOTE_1_8', 'NOTE_1_4'],
+      answer: ['NOTE_1_4', 'PAUSE_1_4', 'NOTE_1_4', 'PAUSE_1_4'],
       variant: QuizVariant.RHYTHM,
     },
   ],
-  [QuizVariant.CHORDS]: [],
+  [QuizVariant.CHORDS]: [
+    {
+      id: 'r-1',
+      question: 'Alle Dur Akkorde',
+      answer: ['C_DUR', 'F_DUR', 'A_DUR'],
+      variant: QuizVariant.CHORDS,
+    },
+  ],
 };

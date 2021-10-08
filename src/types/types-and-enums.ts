@@ -58,6 +58,11 @@ export enum RhythmEnum {
 
 export enum ChordsEnum {
   C_DUR = 'C Dur',
+  F_DUR = 'F Dur',
+  A_DUR = 'A Dur',
+  C_MOLL = 'C Moll',
+  F_MOLL = 'F Moll',
+  A_MOLL = 'A Moll',
 }
 
 export enum QuizVariant {
