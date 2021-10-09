@@ -33,9 +33,9 @@ export const quizOptions: Record<QuizVariant, QuizOption[]> = {
 };
 
 export const quizVariants: Record<QuizVariant, { title: string; iconPath: string; path: string }> = {
-  [QuizVariant.NOTES]: { title: 'Noten', iconPath: 'piano.svg', path: 'noten' },
-  [QuizVariant.RHYTHM]: { title: 'Rhythmus', iconPath: 'drums.svg', path: 'rhythmus' },
-  [QuizVariant.CHORDS]: { title: 'Akkorde', iconPath: 'guitar.svg', path: 'akkorde' },
+  [QuizVariant.NOTES]: { title: 'Noten', iconPath: 'piano.svg', path: '/noten' },
+  [QuizVariant.RHYTHM]: { title: 'Rhythmus', iconPath: 'drums.svg', path: '/rhythmus' },
+  [QuizVariant.CHORDS]: { title: 'Akkorde', iconPath: 'guitar.svg', path: '/akkorde' },
 };
 
 export const quizzes: Record<QuizVariant, QuizType[]> = {

@@ -7,7 +7,7 @@ const Timer = () => {
   const { game } = useGame();
 
   const setTime = () => {
-    const datetime = game && DateTime.fromSeconds(game.startedAt).toRelative();
+    const datetime = game?.startedAt && DateTime.fromSeconds(game.startedAt).toRelative();
     if (typeof datetime === 'string') {
       setStartedAt(datetime);
     }

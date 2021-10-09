@@ -9,7 +9,6 @@ type Props = {
 };
 
 const OptionItem = ({ option, position, isCloned }: Props) => {
-  console.log(option)
   return (
     <div
       className={classNames(

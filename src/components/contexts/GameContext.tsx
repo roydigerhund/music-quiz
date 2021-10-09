@@ -1,18 +1,20 @@
 import { navigate } from '@reach/router';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { ID } from '../../types/types-and-enums';
+import { Game, ID, Player } from '../../types/types-and-enums';
 import { isNotSSR } from '../../utils/ssr';
 
-export type Game = {
-  startedAt: number;
-  succeededQuizzes: ID[];
+type Context = {
+  game?: Game;
+  setupGame: () => void;
+  startGame: (players: Player[]) => void;
+  exitGame: () => void;
+  addSucceededQuiz: (quizId: ID) => void;
 };
-
-type Context = { game?: Game; startGame: () => void; exitGame: () => void; addSucceededQuiz: (quizId: ID) => void };
 
 const GameContext = createContext<Context>({
   game: undefined,
-  startGame: () => {},
+  setupGame: () => {},
+  startGame: ([]) => {},
   exitGame: () => {},
   addSucceededQuiz: () => {},
 });
@@ -25,7 +27,14 @@ export const GameProvider: React.FC = ({ children }) => {
       try {
         const gameJSON = localStorage.getItem('game');
         const game = gameJSON ? ((await JSON.parse(gameJSON)) as Game) : undefined;
-        if (game?.startedAt && Array.isArray(game.succeededQuizzes)) {
+        // basic validation
+        if (
+          game &&
+          'createdAt' in game &&
+          'startedAt' in game &&
+          Array.isArray(game.players) &&
+          Array.isArray(game.succeededQuizzes)
+        ) {
           setGame(game);
         }
       } catch (error) {
@@ -38,9 +47,17 @@ export const GameProvider: React.FC = ({ children }) => {
     getGame();
   }, []);
 
-  const startGame = () => {
+  const setupGame = () => {
     const currentUnix = Math.floor(Date.now() / 1000);
-    const newGame: Game = { startedAt: currentUnix, succeededQuizzes: [] };
+    const newGame: Game = { createdAt: currentUnix, startedAt: null, succeededQuizzes: [], players: [] };
+    localStorage.setItem('game', JSON.stringify(newGame));
+    setGame(newGame);
+  };
+
+  const startGame = (players: Player[]) => {
+    if (!game || game.startedAt) return;
+    const currentUnix = Math.floor(Date.now() / 1000);
+    const newGame: Game = { ...game, startedAt: currentUnix, players };
     localStorage.setItem('game', JSON.stringify(newGame));
     setGame(newGame);
   };
@@ -61,7 +78,9 @@ export const GameProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <GameContext.Provider value={{ game, startGame, exitGame, addSucceededQuiz }}>{children}</GameContext.Provider>
+    <GameContext.Provider value={{ game, setupGame, startGame, exitGame, addSucceededQuiz }}>
+      {children}
+    </GameContext.Provider>
   );
 };
 

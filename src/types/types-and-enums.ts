@@ -6,6 +6,18 @@ export type SVGIcon = React.ForwardRefExoticComponent<
 
 export type ID = string;
 
+export type Player = {
+  id: ID;
+  name: string;
+}
+
+export type Game = {
+  createdAt: number;
+  startedAt: number | null;
+  succeededQuizzes: ID[];
+  players: Player[];
+};
+
 export type OptionID = keyof typeof NotesEnum | keyof typeof RhythmEnum | keyof typeof ChordsEnum;
 export type OptionName = NotesEnum | RhythmEnum | ChordsEnum;
 
