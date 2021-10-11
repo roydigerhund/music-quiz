@@ -38,7 +38,7 @@ const App = () => {
       <GameProvider>
         <React.Suspense
           fallback={
-            <div className="flex justify-center items-center bg-indigo-600 min-h-screen text-xl font-bold text-white uppercase tracking-wide">
+            <div className="flex items-center justify-center min-h-screen text-xl font-bold tracking-wide text-white uppercase bg-indigo-600">
               Loading…
             </div>
           }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const GamePage: React.FunctionComponent = ({ children }) => {
-  return <div className="bg-indigo-600 min-h-screen text-white">{children}</div>;
+  return <div className="min-h-screen text-white bg-indigo-600">{children}</div>;
 };
 
 export default GamePage;

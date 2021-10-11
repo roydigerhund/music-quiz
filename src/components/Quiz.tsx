@@ -105,9 +105,9 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   };
 
   return !quiz ? null : (
-    <div className="flex flex-col mx-auto px-3 sm:px-4 mb-12 items-center">
+    <div className="flex flex-col items-center px-3 mx-auto mb-12 sm:px-4">
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
-        <h1 className="my-8 sm:my-12 md:my-16 text-xl text-center font-medium">{quiz.question}</h1>
+        <h1 className="my-8 text-xl font-medium text-center sm:my-12 md:my-16">{quiz.question}</h1>
         {success === null && (
           <div className={`grid gap-3 sm:gap-4 ${gridCols[quizOptions[quiz.variant].length]}`}>
             {quizOptions[quiz.variant].map((option) => (
@@ -147,25 +147,25 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
           />
         )}
         {success === true && (
-          <div className="rounded-md bg-green-500 p-4">
+          <div className="p-4 bg-green-500 rounded-md">
             <div className="flex">
               <div className="flex-shrink-0">
-                <ThumbUpOutline className="h-5 w-5 text-white" aria-hidden="true" />
+                <ThumbUpOutline className="w-5 h-5 text-white" aria-hidden="true" />
               </div>
               <div className="ml-3">
-                <p className="text-sm uppercase tracking-wider font-semibold text-white">Richtig</p>
+                <p className="text-sm font-semibold tracking-wider text-white uppercase">Richtig</p>
               </div>
             </div>
           </div>
         )}
         {success === false && (
-          <div className="rounded-md bg-red-500 p-4">
+          <div className="p-4 bg-red-500 rounded-md">
             <div className="flex">
               <div className="flex-shrink-0">
-                <ThumbDownOutline className="h-5 w-5 text-white" aria-hidden="true" />
+                <ThumbDownOutline className="w-5 h-5 text-white" aria-hidden="true" />
               </div>
               <div className="ml-3">
-                <p className="text-sm uppercase tracking-wider font-semibold text-white">Falsch</p>
+                <p className="text-sm font-semibold tracking-wider text-white uppercase">Falsch</p>
               </div>
             </div>
           </div>
