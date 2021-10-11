@@ -8,7 +8,7 @@ type Context = {
   setupGame: () => void;
   startGame: (players: Player[]) => void;
   exitGame: () => void;
-  addSucceededQuiz: (quizId: ID) => void;
+  addSucceededQuiz: (quizId: ID, player: Player) => void;
 };
 
 const GameContext = createContext<Context>({
@@ -62,9 +62,15 @@ export const GameProvider: React.FC = ({ children }) => {
     setGame(newGame);
   };
 
-  const addSucceededQuiz = (quizId: ID) => {
+  const addSucceededQuiz = (quizId: ID, player: Player) => {
     if (!game || game.succeededQuizzes.includes(quizId)) return;
-    const newGame: Game = { ...game, succeededQuizzes: [...game?.succeededQuizzes, quizId] };
+    const newGame: Game = {
+      ...game,
+      succeededQuizzes: [...game.succeededQuizzes, quizId],
+      players: game.players.map((p) =>
+        p.id === player.id ? { ...p, succeededQuizzes: [...p.succeededQuizzes, quizId] } : p,
+      ),
+    };
     localStorage.setItem('game', JSON.stringify(newGame));
     setGame(newGame);
   };

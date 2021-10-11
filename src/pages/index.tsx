@@ -57,7 +57,10 @@ const IndexPage = () => {
                     event.preventDefault();
                     if (newPlayerName) {
                       const currentUnix = Math.floor(Date.now() / 1000);
-                      setPlayers([...players, { id: newPlayerName + currentUnix, name: newPlayerName }]);
+                      setPlayers([
+                        ...players,
+                        { id: newPlayerName + currentUnix, name: newPlayerName, succeededQuizzes: [] },
+                      ]);
                       setNewPlayerName('');
                     }
                   }}
@@ -78,13 +81,13 @@ const IndexPage = () => {
                 </form>
               )}
             </div>
-          <Button
-            className="mx-auto"
-            onClick={() => startGame(players)}
-            disabled={players.length === 0}
-            leadingIcon={PlayOutline}
-            label="Spiel Starten"
-          />
+            <Button
+              className="mx-auto"
+              onClick={() => startGame(players)}
+              disabled={players.length === 0}
+              leadingIcon={PlayOutline}
+              label="Spiel Starten"
+            />
           </div>
         </div>
       ) : (

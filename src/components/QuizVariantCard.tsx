@@ -1,11 +1,11 @@
 import { Link } from '@reach/router';
 import React from 'react';
 import { quizVariants, quizzes } from '../data/quizzes';
-import { Game, QuizVariant } from '../types/types-and-enums';
+import { Player, QuizVariant } from '../types/types-and-enums';
 import { classNames } from '../utils/class-names';
 import { useGame } from './contexts/GameContext';
 
-const QuizVariantCard = ({ variant, disabled }: { variant: QuizVariant; disabled?: boolean }) => {
+const QuizVariantCard = ({ variant, player, disabled }: { variant: QuizVariant; player?: Player, disabled?: boolean }) => {
   const { game } = useGame();
 
   return (
@@ -18,6 +18,7 @@ const QuizVariantCard = ({ variant, disabled }: { variant: QuizVariant; disabled
         disabled && 'pointer-events-none opacity-80',
       )}
       to={quizVariants[variant].path}
+      state={{ player }}
     >
       <img src={`/svgs/${quizVariants[variant].iconPath}`} className="w-12 h-12" alt={quizVariants[variant].title} />
       <span>{`${quizzes[variant].filter((q) => game?.succeededQuizzes.includes(q.id)).length}/${

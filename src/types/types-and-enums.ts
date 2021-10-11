@@ -9,6 +9,7 @@ export type ID = string;
 export type Player = {
   id: ID;
   name: string;
+  succeededQuizzes: ID[];
 }
 
 export type Game = {

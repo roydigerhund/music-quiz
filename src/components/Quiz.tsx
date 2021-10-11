@@ -9,11 +9,11 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 import { CursorClickOutline, ThumbDownOutline, ThumbUpOutline } from '@graywolfai/react-heroicons';
-import { Link } from '@reach/router';
+import { Link, useLocation, useNavigate } from '@reach/router';
 import randomInteger from 'random-int';
 import React, { useEffect, useState } from 'react';
 import { quizOptions, quizzes } from '../data/quizzes';
-import { OptionPosition, QuizOption, QuizType, QuizVariant } from '../types/types-and-enums';
+import { OptionPosition, Player, QuizOption, QuizType, QuizVariant } from '../types/types-and-enums';
 import Button from './Button';
 import { useGame } from './contexts/GameContext';
 import Draggable from './Draggable';
@@ -41,10 +41,13 @@ const gridCols: Record<number, string> = {
 };
 
 const Quiz = ({ variant }: { variant: QuizVariant }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [drops, setDrops] = useState<Record<ID, QuizOption | null>>({});
   const [success, setSuccess] = useState<boolean | null>(null);
   const [quiz, setQuiz] = useState<QuizType | undefined>();
   const [activeOption, setActiveOption] = useState<QuizOption | null>(null);
+  const [player, setPlayer] = useState<Player>();
   const sensors = useSensors(useSensor(MouseSensor, {}), useSensor(TouchSensor, {}));
 
   const { game, addSucceededQuiz } = useGame();
@@ -54,6 +57,15 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
     const quizIndexNumber = randomInteger(0, availableQuizzes.length - 1);
     setQuiz(availableQuizzes[quizIndexNumber]);
   };
+
+  useEffect(() => {
+    const state = location.state as { player?: Player };
+    if (typeof state === 'object' && state && 'player' in state && state.player) {
+      setPlayer(state.player);
+    } else {
+      navigate('/');
+    }
+  }, [location]);
 
   useEffect(() => {
     getQuiz();
@@ -90,17 +102,16 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   };
 
   const checkAnswer = () => {
-    if (!quiz) return;
+    if (!quiz || !player) return;
     const userAnswer = Object.entries(drops)
       .filter(([_, option]) => !!option)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([_, option]) => option?.id);
-    console.log(drops, userAnswer, quiz.answer);
     const result =
       userAnswer.length === quiz.answer.length && userAnswer.every((value, index) => value === quiz.answer[index]);
     setSuccess(result);
     if (result) {
-      addSucceededQuiz(quiz.id);
+      addSucceededQuiz(quiz.id, player);
     }
   };
 
