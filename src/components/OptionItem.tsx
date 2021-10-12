@@ -16,10 +16,14 @@ const OptionItem = ({ option, position, isCloned }: Props) => {
         position === OptionPosition.DRAGGING && 'z-10 shadow-xl',
         position === OptionPosition.DRAGGING ? 'cursor-[grabbing]' : 'cursor-[grab]',
         isCloned && 'hidden',
-        !option.iconPath && 'p-2'
+        !option.iconPath && 'p-2',
       )}
     >
-      {option.iconPath ? <img className="w-full h-auto" src={`/svgs/${option.iconPath}`} alt={option.name} /> : option.name}
+      {option.iconPath ? (
+        <img className="w-full h-auto" src={`/svgs/${option.iconPath}`} alt={option.name} />
+      ) : (
+        option.name
+      )}
     </div>
   );
 };

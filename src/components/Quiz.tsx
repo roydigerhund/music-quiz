@@ -120,13 +120,13 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
         <h1 className="my-8 text-xl font-medium text-center sm:my-12 md:my-16">{quiz.question}</h1>
         {success === null && (
-          <div className={`grid gap-3 sm:gap-4 ${gridCols[quizOptions[quiz.variant].length]}`}>
+          <div className={`grid gap-3 sm:gap-4 select-none ${gridCols[quizOptions[quiz.variant].length]}`}>
             {quizOptions[quiz.variant].map((option) => (
               <Draggable key={option.id} id={option.id} option={option} position={OptionPosition.POOL} />
             ))}
           </div>
         )}
-        <div className={`grid gap-3 sm:gap-4 ${gridCols[quiz.answer.length]} my-8 sm:my-12 md:my-16`}>
+        <div className={`grid gap-3 sm:gap-4 select-none ${gridCols[quiz.answer.length]} my-8 sm:my-12 md:my-16`}>
           {Array(quiz.answer.length)
             .fill('')
             .map((_, index) => {

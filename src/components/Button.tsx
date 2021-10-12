@@ -39,7 +39,7 @@ const Button = ({
   );
 
   const buttonClassName = classNames(
-    'flex items-center justify-center shadow-lg text-white tracking-wide font-semibold rounded-full mb-0 hover:mb-0.5 border-b-4 hover:border-b-2 hover:translate-y-[2px] transition-all transform-gpu',
+    'flex items-center justify-center shadow-lg text-white tracking-wide font-semibold rounded-full mb-0 hover:mb-0.5 border-b-4 hover:border-b-2 hover:translate-y-[2px] transition-all transform-gpu select-none',
     disabled
       ? 'pointer-events-none bg-gray-500 border-gray-700'
       : 'bg-pink-500 hover:bg-pink-600 border-pink-700 text-white',
