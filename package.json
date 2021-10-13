@@ -8,7 +8,8 @@
     "build": "NODE_ENV=production npx tailwindcss -i ./src/app.css -o ./src/dist.css --minify && react-static build && workbox generateSW",
     "bundle": "react-static bundle",
     "export": "react-static export",
-    "serve": "serve dist -p 3000 -s"
+    "serve": "serve dist -p 3000 -s",
+    "analyze": "react-static bundle --analyze"
   },
   "dependencies": {
     "@dnd-kit/core": "^3.1.1",
