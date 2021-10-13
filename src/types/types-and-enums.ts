@@ -9,13 +9,13 @@ export type ID = string;
 export type SucceededQuiz = {
   id: ID;
   variant: QuizVariant;
-}
+};
 
 export type Player = {
   id: ID;
   name: string;
   succeededQuizzes: SucceededQuiz[];
-}
+};
 
 export type Game = {
   createdAt: number;
@@ -25,8 +25,12 @@ export type Game = {
   players: Player[];
 };
 
-export type OptionID = keyof typeof NotesEnum | keyof typeof RhythmEnum | keyof typeof ChordsEnum;
-export type OptionName = NotesEnum | RhythmEnum | ChordsEnum;
+export type OptionID =
+  | keyof typeof NotesEnum
+  | keyof typeof RhythmEnum
+  | keyof typeof ChordsEnum
+  | keyof typeof IntervalsEnum;
+export type OptionName = NotesEnum | RhythmEnum | ChordsEnum | IntervalsEnum;
 
 export type QuizOption = {
   id: OptionID;
@@ -68,6 +72,8 @@ export enum RhythmEnum {
   NOTE_1_4 = 'Note 1/4',
   NOTE_1_8 = 'Note 1/8',
   NOTE_1_16 = 'Note 1/16',
+  TRIOLE_1_4 = 'Triole 1/4',
+  TRIOLE_1_8 = 'Triole 1/8',
   PAUSE_1_1 = 'Pause 1/1',
   PAUSE_1_2 = 'Pause 1/2',
   PAUSE_1_4 = 'Pause 1/4',
@@ -84,8 +90,22 @@ export enum ChordsEnum {
   A_MOLL = 'A Moll',
 }
 
+export enum IntervalsEnum {
+  PRIM = 'Prim',
+  SEKUND = 'Sekund',
+  TERZ = 'Terz',
+  QUART = 'Quart',
+  QUINT = 'Quint',
+  SEXT = 'Sext',
+  SEPTIM = 'Septim',
+  OKTAV = 'Oktav',
+  HALBTON = 'Halbton',
+  GANZTON = 'Ganzton',
+}
+
 export enum QuizVariant {
   NOTES = 'Notes',
   RHYTHM = 'Rhythm',
   CHORDS = 'Chords',
+  INTERVALS = 'Intervals',
 }

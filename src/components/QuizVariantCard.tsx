@@ -21,7 +21,7 @@ const QuizVariantCard = ({
   return (
     <Link
       className={classNames(
-        'flex flex-col space-y-4 justify-center items-center shadow-lg text-white tracking-wide font-semibold h-24 xxs:h-32 sm:h-48 px-8 rounded-3xl active:translate-y-[2px] transition-all transform-gpu select-none',
+        'flex xs:flex-col space-x-8 xs:space-x-0 xs:space-y-4 justify-center items-center shadow-lg text-white tracking-wide font-semibold h-24 xs:h-40 px-8 rounded-3xl active:translate-y-[2px] transition-all transform-gpu select-none',
         quizzes[variant].every((q) => succeededQuizIds.includes(q.id))
           ? 'pointer-events-none bg-gray-500 shadow-button-disabled'
           : 'bg-pink-500 active:bg-pink-600 shadow-button active:shadow-button-hover',

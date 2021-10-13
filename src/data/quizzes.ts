@@ -1,4 +1,12 @@
-import { ChordsEnum, NotesEnum, QuizOption, QuizType, QuizVariant, RhythmEnum } from '../types/types-and-enums';
+import {
+  ChordsEnum,
+  IntervalsEnum,
+  NotesEnum,
+  QuizOption,
+  QuizType,
+  QuizVariant,
+  RhythmEnum,
+} from '../types/types-and-enums';
 
 export const rhythmIconPaths: Record<RhythmEnum, string> = {
   [RhythmEnum.NOTE_1_1]: 'rhythm/ganze-note.svg',
@@ -6,6 +14,8 @@ export const rhythmIconPaths: Record<RhythmEnum, string> = {
   [RhythmEnum.NOTE_1_4]: 'rhythm/viertel-note.svg',
   [RhythmEnum.NOTE_1_8]: 'rhythm/achtel-note.svg',
   [RhythmEnum.NOTE_1_16]: 'rhythm/sechzehntel-note.svg',
+  [RhythmEnum.TRIOLE_1_4]: 'rhythm/viertel-triole.svg',
+  [RhythmEnum.TRIOLE_1_8]: 'rhythm/achtel-triole.svg',
   [RhythmEnum.PAUSE_1_1]: 'rhythm/ganze-pause.svg',
   [RhythmEnum.PAUSE_1_2]: 'rhythm/halbe-pause.svg',
   [RhythmEnum.PAUSE_1_4]: 'rhythm/viertel-pause.svg',
@@ -26,17 +36,28 @@ export const chordOptions: QuizOption[] = Object.entries(ChordsEnum).map(([id, n
   name,
 })) as QuizOption[];
 
+export const intervalOptions: QuizOption[] = Object.entries(IntervalsEnum).map(([id, name]) => ({
+  id,
+  name,
+})) as QuizOption[];
+
 export const quizOptions: Record<QuizVariant, QuizOption[]> = {
   [QuizVariant.NOTES]: noteOptions,
   [QuizVariant.RHYTHM]: rhythmOptions,
   [QuizVariant.CHORDS]: chordOptions,
+  [QuizVariant.INTERVALS]: intervalOptions,
 };
 
 export const quizVariants: Record<
   QuizVariant,
   { title: string; iconPath: string; smallIconPath: string; path: string }
 > = {
-  [QuizVariant.NOTES]: { title: 'Noten', iconPath: 'piano.svg', smallIconPath: 'piano-small.svg', path: '/noten' },
+  [QuizVariant.NOTES]: {
+    title: 'Noten',
+    iconPath: 'saxophone.svg',
+    smallIconPath: 'saxophone-small.svg',
+    path: '/noten',
+  },
   [QuizVariant.RHYTHM]: {
     title: 'Rhythmus',
     iconPath: 'drums.svg',
@@ -48,6 +69,12 @@ export const quizVariants: Record<
     iconPath: 'guitar.svg',
     smallIconPath: 'guitar-small.svg',
     path: '/akkorde',
+  },
+  [QuizVariant.INTERVALS]: {
+    title: 'Intervalle',
+    iconPath: 'piano.svg',
+    smallIconPath: 'piano-small.svg',
+    path: '/intervalle',
   },
 };
 
@@ -92,6 +119,14 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       question: 'Alle Dur Akkorde',
       answer: ['C_DUR', 'F_DUR', 'A_DUR'],
       variant: QuizVariant.CHORDS,
+    },
+  ],
+  [QuizVariant.INTERVALS]: [
+    {
+      id: 'i-1',
+      question: 'Prim, Sekund, Terz',
+      answer: ['PRIM', 'SEKUND', 'TERZ'],
+      variant: QuizVariant.INTERVALS,
     },
   ],
 };
