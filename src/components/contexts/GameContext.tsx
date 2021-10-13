@@ -1,21 +1,23 @@
 import { navigate } from '@reach/router';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Game, ID, Player } from '../../types/types-and-enums';
+import { Game, ID, Player, QuizType } from '../../types/types-and-enums';
 import { isNotSSR } from '../../utils/ssr';
 
 type Context = {
   game?: Game;
   setupGame: () => void;
   startGame: (players: Player[]) => void;
-  exitGame: () => void;
-  addSucceededQuiz: (quizId: ID, player: Player) => void;
+  finishGame: () => void;
+  deleteGame: () => void;
+  addSucceededQuiz: (quiz: QuizType, player: Player) => void;
 };
 
 const GameContext = createContext<Context>({
   game: undefined,
   setupGame: () => {},
   startGame: ([]) => {},
-  exitGame: () => {},
+  finishGame: () => {},
+  deleteGame: () => {},
   addSucceededQuiz: () => {},
 });
 
@@ -49,7 +51,13 @@ export const GameProvider: React.FC = ({ children }) => {
 
   const setupGame = () => {
     const currentUnix = Math.floor(Date.now() / 1000);
-    const newGame: Game = { createdAt: currentUnix, startedAt: null, succeededQuizzes: [], players: [] };
+    const newGame: Game = {
+      createdAt: currentUnix,
+      startedAt: null,
+      finishedAt: null,
+      succeededQuizzes: [],
+      players: [],
+    };
     localStorage.setItem('game', JSON.stringify(newGame));
     setGame(newGame);
   };
@@ -62,20 +70,30 @@ export const GameProvider: React.FC = ({ children }) => {
     setGame(newGame);
   };
 
-  const addSucceededQuiz = (quizId: ID, player: Player) => {
-    if (!game || game.succeededQuizzes.includes(quizId)) return;
+  const addSucceededQuiz = (quiz: QuizType, player: Player) => {
+    if (!game || game.succeededQuizzes.some((q) => q.id === quiz.id)) return;
     const newGame: Game = {
       ...game,
-      succeededQuizzes: [...game.succeededQuizzes, quizId],
+      succeededQuizzes: [...game.succeededQuizzes, { id: quiz.id, variant: quiz.variant }],
       players: game.players.map((p) =>
-        p.id === player.id ? { ...p, succeededQuizzes: [...p.succeededQuizzes, quizId] } : p,
+        p.id === player.id
+          ? { ...p, succeededQuizzes: [...p.succeededQuizzes, { id: quiz.id, variant: quiz.variant }] }
+          : p,
       ),
     };
     localStorage.setItem('game', JSON.stringify(newGame));
     setGame(newGame);
   };
 
-  const exitGame = () => {
+  const finishGame = () => {
+    if (!game || game.finishedAt) return;
+    const currentUnix = Math.floor(Date.now() / 1000);
+    const newGame: Game = { ...game, finishedAt: currentUnix };
+    localStorage.setItem('game', JSON.stringify(newGame));
+    setGame(newGame);
+  };
+
+  const deleteGame = () => {
     if (isNotSSR) {
       localStorage.removeItem('game');
       setGame(undefined);
@@ -84,7 +102,7 @@ export const GameProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <GameContext.Provider value={{ game, setupGame, startGame, exitGame, addSucceededQuiz }}>
+    <GameContext.Provider value={{ game, setupGame, startGame, finishGame, deleteGame, addSucceededQuiz }}>
       {children}
     </GameContext.Provider>
   );

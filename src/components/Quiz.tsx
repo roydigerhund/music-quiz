@@ -8,17 +8,7 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
-import {
-  CheckCircleSolid,
-  ChevronLeftSolid,
-  ChevronRightSolid,
-  CursorClickOutline,
-  EmojiSadSolid,
-  ThumbDownOutline,
-  ThumbUpOutline,
-  ThumbUpSolid,
-  XCircleSolid,
-} from '@graywolfai/react-heroicons';
+import { ChevronLeftSolid, ChevronRightSolid, CursorClickOutline } from '@graywolfai/react-heroicons';
 import { useLocation, useNavigate } from '@reach/router';
 import randomInteger from 'random-int';
 import React, { useEffect, useState } from 'react';
@@ -67,7 +57,8 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   const { game, addSucceededQuiz } = useGame();
 
   const getQuiz = () => {
-    const availableQuizzes = quizzes[variant].filter((quiz) => !game?.succeededQuizzes.includes(quiz.id));
+    const succeededQuizIds = game?.succeededQuizzes.map((q) => q.id) || [];
+    const availableQuizzes = quizzes[variant].filter((quiz) => !succeededQuizIds.includes(quiz.id));
     if (!availableQuizzes.length) {
       navigate('/');
       return;
@@ -129,7 +120,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
       userAnswer.length === quiz.answer.length && userAnswer.every((value, index) => value === quiz.answer[index]);
     setSuccess(result);
     if (result) {
-      addSucceededQuiz(quiz.id, player);
+      addSucceededQuiz(quiz, player);
     }
   };
 

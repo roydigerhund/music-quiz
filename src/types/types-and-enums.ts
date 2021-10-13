@@ -6,16 +6,22 @@ export type SVGIcon = React.ForwardRefExoticComponent<
 
 export type ID = string;
 
+export type SucceededQuiz = {
+  id: ID;
+  variant: QuizVariant;
+}
+
 export type Player = {
   id: ID;
   name: string;
-  succeededQuizzes: ID[];
+  succeededQuizzes: SucceededQuiz[];
 }
 
 export type Game = {
   createdAt: number;
   startedAt: number | null;
-  succeededQuizzes: ID[];
+  finishedAt: number | null;
+  succeededQuizzes: SucceededQuiz[];
   players: Player[];
 };
 

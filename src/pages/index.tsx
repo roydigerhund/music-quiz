@@ -2,6 +2,7 @@ import { MusicNoteOutline } from '@graywolfai/react-heroicons';
 import React from 'react';
 import Button from '../components/Button';
 import { useGame } from '../components/contexts/GameContext';
+import GameResult from '../components/GameResult';
 import GameSetup from '../components/GameSetup';
 import QuizSelection from '../components/QuizSelection';
 import GamePage from '../containers/GamePage';
@@ -11,7 +12,9 @@ const IndexPage = () => {
 
   return (
     <GamePage>
-      {game?.startedAt ? (
+      {game?.finishedAt ? (
+        <GameResult />
+      ) : game?.startedAt ? (
         <QuizSelection />
       ) : game?.createdAt ? (
         <GameSetup />

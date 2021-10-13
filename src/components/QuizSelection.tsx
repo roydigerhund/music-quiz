@@ -10,7 +10,7 @@ import QuizVariantCard from './QuizVariantCard';
 import Timer from './Timer';
 
 const QuizSelection = () => {
-  const { game, exitGame } = useGame();
+  const { game, finishGame } = useGame();
   const [selectedPlayer, setSelectedPlayer] = React.useState<Player>();
 
   return !game ? null : (
@@ -54,7 +54,7 @@ const QuizSelection = () => {
           <div className="text-indigo-100">
             Das Spiel wurde <Timer /> begonnen.
           </div>
-          <ButtonSmall leadingIcon={LogoutOutline} onClick={exitGame} label="Spiel Beenden" className="mx-auto" />
+          <ButtonSmall leadingIcon={LogoutOutline} onClick={finishGame} label="Spiel Beenden" className="mx-auto" />
         </div>
       )}
     </div>

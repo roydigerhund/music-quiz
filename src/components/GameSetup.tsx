@@ -5,8 +5,8 @@ import Button, { ButtonType } from './Button';
 import ButtonSmall from './ButtonSmall';
 import { useGame } from './contexts/GameContext';
 
-const QuizSelection = () => {
-  const { game, startGame, exitGame } = useGame();
+const GameSetup = () => {
+  const { game, startGame, finishGame } = useGame();
   const [players, setPlayers] = useState<Player[]>([]);
   const [newPlayerName, setNewPlayerName] = useState('');
 
@@ -72,10 +72,10 @@ const QuizSelection = () => {
           leadingIcon={PlayOutline}
           label="Spiel Starten"
         />
-        <ButtonSmall leadingIcon={XSolid} onClick={exitGame} label="Abbrechen" className="mx-auto mt-8" />
+        <ButtonSmall leadingIcon={XSolid} onClick={finishGame} label="Abbrechen" className="mx-auto mt-8" />
       </div>
     </div>
   );
 };
 
-export default QuizSelection;
+export default GameSetup;
