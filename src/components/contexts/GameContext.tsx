@@ -8,6 +8,7 @@ type Context = {
   setupGame: () => void;
   startGame: (players: Player[]) => void;
   finishGame: () => void;
+  continueGame: () => void;
   deleteGame: () => void;
   addSucceededQuiz: (quiz: QuizType, player: Player) => void;
 };
@@ -17,6 +18,7 @@ const GameContext = createContext<Context>({
   setupGame: () => {},
   startGame: ([]) => {},
   finishGame: () => {},
+  continueGame: () => {},
   deleteGame: () => {},
   addSucceededQuiz: () => {},
 });
@@ -88,9 +90,15 @@ export const GameProvider: React.FC = ({ children }) => {
 
   const finishGame = () => {
     if (!game || game.finishedAt) return;
-    // TODO if no succeeded quizzes, delete game
     const currentUnix = Math.floor(Date.now() / 1000);
     const newGame: Game = { ...game, finishedAt: currentUnix };
+    localStorage.setItem('game', JSON.stringify(newGame));
+    setGame(newGame);
+  };
+
+  const continueGame = () => {
+    if (!game || !game.finishedAt) return;
+    const newGame: Game = { ...game, finishedAt: null };
     localStorage.setItem('game', JSON.stringify(newGame));
     setGame(newGame);
   };
@@ -104,7 +112,9 @@ export const GameProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <GameContext.Provider value={{ game, setupGame, startGame, finishGame, deleteGame, addSucceededQuiz }}>
+    <GameContext.Provider
+      value={{ game, setupGame, startGame, finishGame, continueGame, deleteGame, addSucceededQuiz }}
+    >
       {children}
     </GameContext.Provider>
   );

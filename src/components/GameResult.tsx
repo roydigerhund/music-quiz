@@ -1,9 +1,9 @@
-import { MusicNoteOutline, TrashOutline } from '@graywolfai/react-heroicons';
+import { ChevronLeftSolid, MusicNoteOutline } from '@graywolfai/react-heroicons';
 import React from 'react';
 import { quizVariants } from '../data/quizzes';
-import { QuizVariant } from '../types/types-and-enums';
 import { classNames } from '../utils/class-names';
 import Button from './Button';
+import ButtonSmall from './ButtonSmall';
 import { useGame } from './contexts/GameContext';
 
 // gold hex color
@@ -18,7 +18,7 @@ const white = '#ffffff';
 const positionColors = [gold, silver, bronze, white];
 
 const GameResult = () => {
-  const { game, deleteGame } = useGame();
+  const { game, deleteGame, continueGame } = useGame();
 
   let position = 0;
 
@@ -33,16 +33,6 @@ const GameResult = () => {
             if (index > 0 && sortedPlayers[index - 1].succeededQuizzes.length > player.succeededQuizzes.length) {
               position++;
             }
-
-            const succeededNoteQuizzes = player.succeededQuizzes.filter(
-              (quiz) => quiz.variant === QuizVariant.NOTES,
-            ).length;
-            const succeededRhythmQuizzes = player.succeededQuizzes.filter(
-              (quiz) => quiz.variant === QuizVariant.RHYTHM,
-            ).length;
-            const succeededChordQuizzes = player.succeededQuizzes.filter(
-              (quiz) => quiz.variant === QuizVariant.CHORDS,
-            ).length;
 
             return (
               <div key={player.id} className="w-full p-4 bg-white rounded-lg">
@@ -59,14 +49,14 @@ const GameResult = () => {
                     </div>
                     <div className="text-xl font-bold text-gray-800 break-all">{player.name}</div>
                   </div>
-                  <div className="flex-shrink-0 text-lg font-bold text-gray-800 ml-4">
+                  <div className="flex-shrink-0 ml-4 text-lg font-bold text-gray-800">
                     {player.succeededQuizzes.length}{' '}
                     <span className="text-sm text-gray-500">
                       Punkt{player.succeededQuizzes.length !== 1 ? 'e' : ''}
                     </span>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 xs:grid-cols-4 gap-1 mt-4">
+                <div className="mt-4 grid grid-cols-2 xs:grid-cols-4 gap-1">
                   {Object.entries(quizVariants).map(([variantKey, quizVariant]) => {
                     const succeededQuizzes = player.succeededQuizzes.filter(
                       (quiz) => quiz.variant === variantKey,
@@ -97,6 +87,12 @@ const GameResult = () => {
         </div>
       </div>
       <Button className="mx-auto" onClick={deleteGame} leadingIcon={MusicNoteOutline} label="Neues Spiel" />
+      <ButtonSmall
+        className="mx-auto mt-8"
+        onClick={continueGame}
+        leadingIcon={ChevronLeftSolid}
+        label="Spiel fortsetzen"
+      />
     </div>
   );
 };
