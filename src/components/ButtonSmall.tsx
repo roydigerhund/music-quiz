@@ -25,7 +25,7 @@ const ButtonSmall = ({ onClick, label, leadingIcon, disabled, to, htmlType, clas
 
   const buttonClassName = classNames(
     'flex items-center justify-center px-4 py-2 text-sm tracking-wide bg-indigo-800 rounded-lg select-none',
-    disabled ? 'pointer-events-none text-indigo-300' : 'text-indigo-100 hover:bg-indigo-900 hover:text-white',
+    disabled ? 'pointer-events-none text-indigo-300' : 'text-indigo-100 active:bg-indigo-900 active:text-white',
     className,
   );
 

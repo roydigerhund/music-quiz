@@ -88,7 +88,7 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
   ],
   [QuizVariant.CHORDS]: [
     {
-      id: 'r-1',
+      id: 'c-1',
       question: 'Alle Dur Akkorde',
       answer: ['C_DUR', 'F_DUR', 'A_DUR'],
       variant: QuizVariant.CHORDS,

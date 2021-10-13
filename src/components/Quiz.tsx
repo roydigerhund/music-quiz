@@ -6,7 +6,7 @@ import {
   MouseSensor,
   TouchSensor,
   useSensor,
-  useSensors
+  useSensors,
 } from '@dnd-kit/core';
 import { ChevronLeftSolid, ChevronRightSolid, CursorClickOutline } from '@graywolfai/react-heroicons';
 import { useLocation, useNavigate } from '@reach/router';
@@ -185,9 +185,11 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
             disabled={Object.entries(drops).filter(([_, option]) => !!option).length !== quiz.answer.length}
           />
         )}
-        <Confetti active={!!success} config={confettiConfig} />
+        <div className="relative z-10">
+          <Confetti active={!!success} config={confettiConfig} />
+        </div>
         {success === true && (
-          <div className="p-4 bg-white rounded-md animate__tada">
+          <div className="p-4 bg-white rounded-md animate__tada relative z-0">
             <div className="flex items-center justify-center">
               <div className="flex-shrink-0 text-lg">🎉</div>
               <div className="ml-3">
