@@ -3,17 +3,20 @@ import { useDraggable } from '@dnd-kit/core';
 import { classNames } from '../utils/class-names';
 import { OptionPosition, QuizOption } from '../types/types-and-enums';
 import OptionItem from './OptionItem';
+import { DH_NOT_SUITABLE_GENERATOR } from 'constants';
 
 type Props = {
   id: string;
   option: QuizOption;
   position: OptionPosition;
+  disabled?: boolean;
 };
 
-const Draggable = ({ id, option, position }: Props) => {
+const Draggable = ({ id, option, position, disabled }: Props) => {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id,
     data: option,
+    disabled,
   });
 
   return (

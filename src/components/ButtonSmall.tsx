@@ -3,11 +3,6 @@ import React from 'react';
 import { classNames } from '../utils/class-names';
 import { Link } from '@reach/router';
 
-export enum ButtonType {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-}
-
 type Props = {
   onClick?: () => void;
   label: string;
@@ -15,36 +10,22 @@ type Props = {
   disabled?: boolean;
   to?: string;
   htmlType?: 'button' | 'submit' | 'reset';
-  type?: ButtonType;
   className?: string;
 };
 
-const Button = ({
-  onClick,
-  label,
-  leadingIcon,
-  disabled,
-  to,
-  htmlType,
-  type = ButtonType.PRIMARY,
-  className,
-}: Props) => {
+const ButtonSmall = ({ onClick, label, leadingIcon, disabled, to, htmlType, className }: Props) => {
   const LeadingIcon = leadingIcon;
 
   const renderContent = () => (
     <>
-      {!!LeadingIcon && <LeadingIcon className="w-6 h-6 mr-3 -ml-2" />}
+      {!!LeadingIcon && <LeadingIcon className="w-4 h-4 mr-2 -ml-2" />}
       <span>{label}</span>
     </>
   );
 
   const buttonClassName = classNames(
-    'flex items-center justify-center shadow-lg text-white tracking-wide font-semibold rounded-full mb-0 hover:mb-0.5 border-b-4 hover:border-b-2 hover:translate-y-[2px] transition-all transform-gpu select-none',
-    disabled
-      ? 'pointer-events-none bg-gray-500 border-gray-700'
-      : 'bg-pink-500 hover:bg-pink-600 border-pink-700 text-white',
-    type === ButtonType.PRIMARY && 'py-4 px-8',
-    type === ButtonType.SECONDARY && 'py-3 px-6 text-sm',
+    'flex items-center justify-center px-4 py-2 text-sm tracking-wide bg-indigo-800 rounded-lg select-none',
+    disabled ? 'pointer-events-none text-indigo-300' : 'text-indigo-100 hover:bg-indigo-900 hover:text-white',
     className,
   );
 
@@ -59,4 +40,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default ButtonSmall;

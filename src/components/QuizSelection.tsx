@@ -1,9 +1,10 @@
-import { CheckCircleSolid, CheckOutline, TrashOutline } from '@graywolfai/react-heroicons';
+import { CheckCircleSolid, CheckOutline, LogoutOutline, TrashOutline } from '@graywolfai/react-heroicons';
 import { Link } from '@reach/router';
 import React from 'react';
 import { quizzes, quizVariants } from '../data/quizzes';
 import { Game, Player, QuizVariant } from '../types/types-and-enums';
 import { classNames } from '../utils/class-names';
+import ButtonSmall from './ButtonSmall';
 import { useGame } from './contexts/GameContext';
 import QuizVariantCard from './QuizVariantCard';
 import Timer from './Timer';
@@ -53,13 +54,7 @@ const QuizSelection = () => {
           <div className="text-indigo-100">
             Das Spiel wurde <Timer /> begonnen.
           </div>
-          <button
-            role="button"
-            onClick={exitGame}
-            className="px-4 py-2 text-sm tracking-wide text-indigo-100 bg-indigo-800 rounded-lg hover:bg-indigo-900 hover:text-white"
-          >
-            Spiel Beenden
-          </button>
+          <ButtonSmall leadingIcon={LogoutOutline} onClick={exitGame} label="Spiel Beenden" className="mx-auto" />
         </div>
       )}
     </div>

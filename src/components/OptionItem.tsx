@@ -20,7 +20,7 @@ const OptionItem = ({ option, position, isCloned }: Props) => {
       )}
     >
       {option.iconPath ? (
-        <img className="w-full h-auto" src={`/svgs/${option.iconPath}`} alt={option.name} />
+        <img className="w-full h-auto" draggable={false} src={`/svgs/${option.iconPath}`} alt={option.name} />
       ) : (
         option.name
       )}

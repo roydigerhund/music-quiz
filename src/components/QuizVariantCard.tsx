@@ -5,7 +5,15 @@ import { Player, QuizVariant } from '../types/types-and-enums';
 import { classNames } from '../utils/class-names';
 import { useGame } from './contexts/GameContext';
 
-const QuizVariantCard = ({ variant, player, disabled }: { variant: QuizVariant; player?: Player, disabled?: boolean }) => {
+const QuizVariantCard = ({
+  variant,
+  player,
+  disabled,
+}: {
+  variant: QuizVariant;
+  player?: Player;
+  disabled?: boolean;
+}) => {
   const { game } = useGame();
 
   return (
@@ -20,7 +28,12 @@ const QuizVariantCard = ({ variant, player, disabled }: { variant: QuizVariant; 
       to={quizVariants[variant].path}
       state={{ player }}
     >
-      <img src={`/svgs/${quizVariants[variant].iconPath}`} className="w-12 h-12" alt={quizVariants[variant].title} />
+      <img
+        src={`/svgs/${quizVariants[variant].iconPath}`}
+        className="w-12 h-12"
+        alt={quizVariants[variant].title}
+        draggable={false}
+      />
       <span>{`${quizzes[variant].filter((q) => game?.succeededQuizzes.includes(q.id)).length}/${
         quizzes[variant].length
       }`}</span>

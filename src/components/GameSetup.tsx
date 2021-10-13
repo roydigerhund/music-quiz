@@ -1,11 +1,12 @@
-import { PlayOutline, TrashOutline } from '@graywolfai/react-heroicons';
+import { PlayOutline, TrashOutline, XSolid } from '@graywolfai/react-heroicons';
 import React, { useState } from 'react';
 import { Player } from '../types/types-and-enums';
 import Button, { ButtonType } from './Button';
+import ButtonSmall from './ButtonSmall';
 import { useGame } from './contexts/GameContext';
 
 const QuizSelection = () => {
-  const { game, startGame } = useGame();
+  const { game, startGame, exitGame } = useGame();
   const [players, setPlayers] = useState<Player[]>([]);
   const [newPlayerName, setNewPlayerName] = useState('');
 
@@ -71,6 +72,7 @@ const QuizSelection = () => {
           leadingIcon={PlayOutline}
           label="Spiel Starten"
         />
+        <ButtonSmall leadingIcon={XSolid} onClick={exitGame} label="Abbrechen" className="mx-auto mt-8" />
       </div>
     </div>
   );

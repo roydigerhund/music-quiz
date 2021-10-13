@@ -8,13 +8,26 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
-import { CursorClickOutline, ThumbDownOutline, ThumbUpOutline } from '@graywolfai/react-heroicons';
-import { Link, useLocation, useNavigate } from '@reach/router';
+import {
+  CheckCircleSolid,
+  ChevronLeftSolid,
+  ChevronRightSolid,
+  CursorClickOutline,
+  EmojiSadSolid,
+  ThumbDownOutline,
+  ThumbUpOutline,
+  ThumbUpSolid,
+  XCircleSolid,
+} from '@graywolfai/react-heroicons';
+import { useLocation, useNavigate } from '@reach/router';
 import randomInteger from 'random-int';
 import React, { useEffect, useState } from 'react';
+import Confetti from 'react-confetti';
 import { quizOptions, quizzes } from '../data/quizzes';
+import useWindowDimensions from '../hooks/window-dimenions';
 import { OptionPosition, Player, QuizOption, QuizType, QuizVariant } from '../types/types-and-enums';
 import Button from './Button';
+import ButtonSmall from './ButtonSmall';
 import { useGame } from './contexts/GameContext';
 import Draggable from './Draggable';
 import Droppable from './Droppable';
@@ -43,6 +56,7 @@ const gridCols: Record<number, string> = {
 const Quiz = ({ variant }: { variant: QuizVariant }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { height, width } = useWindowDimensions();
   const [drops, setDrops] = useState<Record<ID, QuizOption | null>>({});
   const [success, setSuccess] = useState<boolean | null>(null);
   const [quiz, setQuiz] = useState<QuizType | undefined>();
@@ -54,6 +68,10 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
 
   const getQuiz = () => {
     const availableQuizzes = quizzes[variant].filter((quiz) => !game?.succeededQuizzes.includes(quiz.id));
+    if (!availableQuizzes.length) {
+      navigate('/');
+      return;
+    }
     const quizIndexNumber = randomInteger(0, availableQuizzes.length - 1);
     setQuiz(availableQuizzes[quizIndexNumber]);
   };
@@ -117,10 +135,15 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
 
   return !quiz ? null : (
     <div className="flex flex-col items-center px-3 mx-auto mb-12 sm:px-4">
+      {success === true && <Confetti width={width} height={height} />}
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
-        <h1 className="my-8 text-xl font-medium text-center sm:my-12 md:my-16">{quiz.question}</h1>
+        <h1 className="mt-8 sm:mt-12 md:mt-16 text-xl font-medium text-center">{quiz.question}</h1>
         {success === null && (
-          <div className={`grid gap-3 sm:gap-4 select-none ${gridCols[quizOptions[quiz.variant].length]}`}>
+          <div
+            className={`mt-8 sm:mt-12 md:mt-16 grid gap-3 sm:gap-4 select-none ${
+              gridCols[quizOptions[quiz.variant].length]
+            }`}
+          >
             {quizOptions[quiz.variant].map((option) => (
               <Draggable key={option.id} id={option.id} option={option} position={OptionPosition.POOL} />
             ))}
@@ -140,6 +163,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
                       id={`${dropId}__${childOption.id}`}
                       option={childOption}
                       position={OptionPosition.ANSWER}
+                      disabled={success !== null}
                     />
                   )}
                 </Droppable>
@@ -158,35 +182,34 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
           />
         )}
         {success === true && (
-          <div className="p-4 bg-green-500 rounded-md">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <ThumbUpOutline className="w-5 h-5 text-white" aria-hidden="true" />
-              </div>
+          <div className="p-4 bg-white rounded-md animate__tada">
+            <div className="flex items-center justify-center">
+              <div className="flex-shrink-0 text-lg">🎉</div>
               <div className="ml-3">
-                <p className="text-sm font-semibold tracking-wider text-white uppercase">Richtig</p>
+                <p className="text-sm font-semibold tracking-wider text-gray-600 uppercase">
+                  Super, deine Antwort war richtig!
+                </p>
               </div>
             </div>
           </div>
         )}
         {success === false && (
-          <div className="p-4 bg-red-500 rounded-md">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <ThumbDownOutline className="w-5 h-5 text-white" aria-hidden="true" />
-              </div>
+          <div className="p-4 bg-white rounded-md animate__shakeX">
+            <div className="flex items-center justify-center">
+              <div className="flex-shrink-0 text-lg">😔</div>
               <div className="ml-3">
-                <p className="text-sm font-semibold tracking-wider text-white uppercase">Falsch</p>
+                <p className="text-sm font-semibold tracking-wider text-gray-600 uppercase">
+                  Leider war deine Antwort falsch!
+                </p>
               </div>
             </div>
           </div>
         )}
-        <Link
-          className="mt-12 flex items-center shadow-lg text-white tracking-wide font-semibold py-4 px-8 rounded-full border-b-4 hover:border-b-2 hover:translate-y-[2px] transition-all transform-gpu bg-pink-500 hover:bg-pink-600 border-pink-700"
-          to="/"
-        >
-          Zurück zur Übersicht
-        </Link>
+        {success === null ? (
+          <ButtonSmall to="/" leadingIcon={ChevronLeftSolid} label="Zurück zur Übersicht" className="mt-8" />
+        ) : (
+          <Button to="/" leadingIcon={ChevronRightSolid} label="Weiter" className="mt-8" />
+        )}
       </DndContext>
     </div>
   );

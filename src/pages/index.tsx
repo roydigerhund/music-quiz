@@ -17,7 +17,7 @@ const IndexPage = () => {
         <GameSetup />
       ) : (
         <div className="flex flex-col items-center justify-center">
-          <img src="/images/intro-bg.png" className="max-w-[500px] w-full h-auto" />
+          <img src="/images/intro-bg.png" className="max-w-[500px] w-full h-auto" draggable={false} />
           <div className="px-4 mt-8 mb-10 text-center">
             <h1 className="text-4xl font-bold leading-tight sm:text-5xl md:text-6xl">Lustiges Musik&nbsp;Quiz</h1>
             <p className="mt-4 p md:mt-8">Mit viel Liebe für euch gemacht von eurem Lehrer Herr Schmid.</p>
