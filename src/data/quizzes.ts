@@ -69,19 +69,19 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
   [QuizVariant.RHYTHM]: [
     {
       id: 'r-1',
-      question: 'Erster Rhythums',
+      question: 'Erste Note und erste Pause abwechselnd',
       answer: ['NOTE_1_1', 'PAUSE_1_1', 'NOTE_1_1', 'PAUSE_1_1'],
       variant: QuizVariant.RHYTHM,
     },
     {
       id: 'r-2',
-      question: 'Zweiter Rhythmus',
+      question: 'Zweite Note und zweite Pause abwechselnd',
       answer: ['NOTE_1_2', 'PAUSE_1_2', 'NOTE_1_2', 'PAUSE_1_2'],
       variant: QuizVariant.RHYTHM,
     },
     {
       id: 'r-3',
-      question: 'Dritter Rhythmus',
+      question: 'Dritte Note und dritte Pause abwechselnd',
       answer: ['NOTE_1_4', 'PAUSE_1_4', 'NOTE_1_4', 'PAUSE_1_4'],
       variant: QuizVariant.RHYTHM,
     },
