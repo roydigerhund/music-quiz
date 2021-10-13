@@ -126,9 +126,9 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
 
   return !quiz ? null : (
     <div className="flex flex-col items-center px-3 mx-auto mb-12 sm:px-4">
-      {success === true && <Confetti width={width} height={height} />}
+      {success === true && <Confetti width={width} height={height} initialVelocityY={100} />}
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
-        <h1 className="mt-8 sm:mt-12 md:mt-16 text-xl font-medium text-center">{quiz.question}</h1>
+        <h1 className="mt-8 text-xl font-medium text-center sm:mt-12 md:mt-16">{quiz.question}</h1>
         {success === null && (
           <div
             className={`mt-8 sm:mt-12 md:mt-16 grid gap-3 sm:gap-4 select-none ${

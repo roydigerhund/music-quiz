@@ -17,7 +17,7 @@ const QuizSelection = () => {
     <div className="px-4 mt-8 sm:px-3">
       <h1 className="h1">{!!selectedPlayer ? 'Quiz auswählen' : 'Spieler auswählen'}</h1>
       <div className="max-w-3xl mx-auto my-8">
-        <div className="flex flex-row flex-wrap items-center justify-center  -m-2">
+        <div className="flex flex-row flex-wrap items-center justify-center -m-2 ">
           {game.players.map((player) => (
             <div
               key={player.id}

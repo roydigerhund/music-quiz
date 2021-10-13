@@ -21,10 +21,10 @@ const QuizVariantCard = ({
   return (
     <Link
       className={classNames(
-        'flex flex-col space-y-4 justify-center items-center shadow-lg text-white tracking-wide font-semibold h-24 xxs:h-32 sm:h-48 px-8 rounded-3xl border-b-4 hover:border-b-2 hover:translate-y-[2px] transition-all transform-gpu',
+        'flex flex-col space-y-4 justify-center items-center shadow-lg text-white tracking-wide font-semibold h-24 xxs:h-32 sm:h-48 px-8 rounded-3xl hover:translate-y-[2px] transition-all transform-gpu',
         quizzes[variant].every((q) => succeededQuizIds.includes(q.id))
-          ? 'pointer-events-none bg-gray-500 border-gray-700'
-          : 'bg-pink-500 hover:bg-pink-600 border-pink-700',
+          ? 'pointer-events-none bg-gray-500 shadow-button-disabled'
+          : 'bg-pink-500 hover:bg-pink-600 shadow-button hover:shadow-button-hover',
         disabled && 'pointer-events-none opacity-80',
       )}
       to={quizVariants[variant].path}

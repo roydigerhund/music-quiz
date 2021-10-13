@@ -13,7 +13,7 @@ const GameSetup = () => {
   return !game ? null : (
     <div>
       <div className="px-4 py-8 sm:px-3">
-        <h1 className="h1 mb-8">Mitspieler eintragen</h1>
+        <h1 className="mb-8 h1">Mitspieler eintragen</h1>
         <div className="w-full max-w-xs mx-auto mb-8">
           <div className="flex flex-col items-center justify-center my-4 space-y-4">
             {players.map((player) => (
