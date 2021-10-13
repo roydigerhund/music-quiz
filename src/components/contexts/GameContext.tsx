@@ -34,6 +34,7 @@ export const GameProvider: React.FC = ({ children }) => {
           game &&
           'createdAt' in game &&
           'startedAt' in game &&
+          'finishedAt' in game &&
           Array.isArray(game.players) &&
           Array.isArray(game.succeededQuizzes)
         ) {
