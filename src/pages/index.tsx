@@ -25,7 +25,7 @@ const IndexPage = () => {
             <h1 className="text-4xl font-bold leading-tight sm:text-5xl md:text-6xl">Lustiges Musik&nbsp;Quiz</h1>
             <p className="mt-4 p md:mt-8">Mit viel Liebe für euch gemacht von eurem Lehrer Herr Schmid.</p>
           </div>
-          <Button onClick={setupGame} label="Neues Spiel" leadingIcon={MusicNoteOutline} className="mb-8" />
+          <Button onClick={setupGame} label="Neues Spiel" leadingIcon={MusicNoteOutline} />
         </div>
       )}
     </GamePage>

@@ -88,6 +88,7 @@ export const GameProvider: React.FC = ({ children }) => {
 
   const finishGame = () => {
     if (!game || game.finishedAt) return;
+    // TODO if no succeeded quizzes, delete game
     const currentUnix = Math.floor(Date.now() / 1000);
     const newGame: Game = { ...game, finishedAt: currentUnix };
     localStorage.setItem('game', JSON.stringify(newGame));

@@ -6,13 +6,13 @@ import {
   MouseSensor,
   TouchSensor,
   useSensor,
-  useSensors,
+  useSensors
 } from '@dnd-kit/core';
 import { ChevronLeftSolid, ChevronRightSolid, CursorClickOutline } from '@graywolfai/react-heroicons';
 import { useLocation, useNavigate } from '@reach/router';
 import randomInteger from 'random-int';
 import React, { useEffect, useState } from 'react';
-import Confetti from 'react-confetti';
+import Confetti from 'react-dom-confetti';
 import { quizOptions, quizzes } from '../data/quizzes';
 import useWindowDimensions from '../hooks/window-dimenions';
 import { OptionPosition, Player, QuizOption, QuizType, QuizVariant } from '../types/types-and-enums';
@@ -41,6 +41,20 @@ const gridCols: Record<number, string> = {
   13: 'grid-cols-5 sm:grid-cols-7',
   14: 'grid-cols-5 sm:grid-cols-7',
   15: 'grid-cols-5',
+};
+
+const confettiConfig = {
+  angle: 90,
+  spread: 90,
+  startVelocity: 40,
+  elementCount: 200,
+  dragFriction: 0.12,
+  duration: 5000,
+  stagger: 3,
+  width: '10px',
+  height: '10px',
+  perspective: '500px',
+  colors: ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a'],
 };
 
 const Quiz = ({ variant }: { variant: QuizVariant }) => {
@@ -125,8 +139,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   };
 
   return !quiz ? null : (
-    <div className="flex flex-col items-center px-3 mx-auto mb-12 sm:px-4">
-      {success === true && <Confetti width={width} height={height} initialVelocityY={100} />}
+    <div className="flex flex-col items-center px-3 mx-auto sm:px-4">
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
         <h1 className="mt-8 text-xl font-medium text-center sm:mt-12 md:mt-16">{quiz.question}</h1>
         {success === null && (
@@ -172,6 +185,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
             disabled={Object.entries(drops).filter(([_, option]) => !!option).length !== quiz.answer.length}
           />
         )}
+        <Confetti active={!!success} config={confettiConfig} />
         {success === true && (
           <div className="p-4 bg-white rounded-md animate__tada">
             <div className="flex items-center justify-center">
