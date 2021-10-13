@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   mode: 'jit',
   purge: ['./src/**/*.tsx', './src/**/*.ts'],
@@ -17,6 +19,11 @@ module.exports = {
           800: '#771b35',
           900: '#49111c',
         },
+      },
+      boxShadow: {
+        'button': '0 4px 0 0 #a22652',
+        'button-hover': '0 2px 0 0 #a22652',
+        'button-disabled': '0 4px 0 0 ' + colors.coolGray[700],
       },
     },
     screens: {
