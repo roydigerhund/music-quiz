@@ -43,6 +43,7 @@ export type QuizType = {
   question: string;
   answer: OptionID[];
   variant: QuizVariant;
+  soundFilePath?: string;
 };
 
 export enum OptionPosition {

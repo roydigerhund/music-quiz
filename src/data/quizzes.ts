@@ -124,9 +124,10 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
   [QuizVariant.INTERVALS]: [
     {
       id: 'i-1',
-      question: 'Prim, Sekund, Terz',
-      answer: ['PRIM', 'SEKUND', 'TERZ'],
+      question: 'Welches Intervall?',
+      answer: ['QUINT'],
       variant: QuizVariant.INTERVALS,
+      soundFilePath: '/sounds/intervals/quinte.mp3',
     },
   ],
 };

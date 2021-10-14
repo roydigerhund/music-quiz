@@ -8,7 +8,14 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
-import { ChevronLeftSolid, ChevronRightSolid, CursorClickOutline } from '@graywolfai/react-heroicons';
+import {
+  ChevronLeftSolid,
+  ChevronRightSolid,
+  CursorClickOutline,
+  PauseSolid,
+  PlayOutline,
+  PlaySolid,
+} from '@graywolfai/react-heroicons';
 import { useLocation, useNavigate } from '@reach/router';
 import randomInteger from 'random-int';
 import React, { useEffect, useState } from 'react';
@@ -60,7 +67,8 @@ const confettiConfig = {
 const Quiz = ({ variant }: { variant: QuizVariant }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { height, width } = useWindowDimensions();
+  const [audioPlaying, setAudioPlaying] = useState(false);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [drops, setDrops] = useState<Record<ID, QuizOption | null>>({});
   const [success, setSuccess] = useState<boolean | null>(null);
   const [quiz, setQuiz] = useState<QuizType | undefined>();
@@ -94,6 +102,13 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
     getQuiz();
   }, [variant]);
 
+  useEffect(() => {
+    if (quiz?.soundFilePath) {
+      const audioElement = new Audio(quiz.soundFilePath);
+      setAudio(audioElement);
+    }
+  }, [quiz]);
+
   const handleDragStart = (event: DragStartEvent) => {
     setActiveOption(event.active.data.current as QuizOption);
   };
@@ -124,6 +139,22 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
     setActiveOption(null);
   };
 
+  const toggleAudio = () => {
+    if (!audio) return;
+    if (audioPlaying) {
+      audio.pause();
+      audio.currentTime = 0;
+      setAudioPlaying(false);
+    } else {
+      audio.play();
+      setAudioPlaying(true);
+      audio.onended = () => {
+        setAudioPlaying(false);
+        console.log('ended');
+      };
+    }
+  };
+
   const checkAnswer = () => {
     if (!quiz || !player) return;
     const userAnswer = Object.entries(drops)
@@ -141,7 +172,18 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
   return !quiz ? null : (
     <div className="flex flex-col items-center px-3 mx-auto sm:px-4">
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
-        <h1 className="mt-8 h3 sm:mt-12 md:mt-16">{quiz.question}</h1>
+        <h1 className="mt-8 h3 sm:mt-12 md:mt-16">
+          {quiz.soundFilePath && (
+            <span className="relative block mb-4 mx-auto w-6 h-6 bg-white border-6 border-indigo-600 rounded-full cursor-pointer" onClick={toggleAudio}>
+              {audioPlaying ? (
+                <PauseSolid className="absolute -inset-1.5 w-10 h-10 text-pink-500" />
+              ) : (
+                <PlaySolid className="absolute -inset-1.5 w-10 h-10 text-pink-500" />
+              )}
+            </span>
+          )}
+          {quiz.question}
+        </h1>
         {success === null && (
           <div
             className={`mt-8 sm:mt-12 md:mt-16 grid gap-3 sm:gap-4 select-none ${
