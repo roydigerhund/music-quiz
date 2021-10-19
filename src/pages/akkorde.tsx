@@ -5,7 +5,7 @@ import { QuizVariant } from "../types/types-and-enums";
 
 const AkkordePage = () => (
   <GamePage>
-    <Quiz variant={QuizVariant.CHORDS} />
+    {/* <Quiz variant={QuizVariant.CHORDS} /> */}
   </GamePage>
 );
 

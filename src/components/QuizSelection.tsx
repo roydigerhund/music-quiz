@@ -43,10 +43,10 @@ const QuizSelection = () => {
           ))}
         </div>
       </div>
-      <div className="max-w-3xl mx-auto my-8 grid xs:gap-3 gap-4 xs:grid-cols-2 md:grid-cols-4">
+      <div className="max-w-3xl mx-auto my-8 grid xs:gap-3 gap-4 xs:grid-cols-3">
         <QuizVariantCard variant={QuizVariant.NOTES} player={selectedPlayer} disabled={!selectedPlayer} />
         <QuizVariantCard variant={QuizVariant.RHYTHM} player={selectedPlayer} disabled={!selectedPlayer} />
-        <QuizVariantCard variant={QuizVariant.CHORDS} player={selectedPlayer} disabled={!selectedPlayer} />
+        {/* <QuizVariantCard variant={QuizVariant.CHORDS} player={selectedPlayer} disabled={!selectedPlayer} /> */}
         <QuizVariantCard variant={QuizVariant.INTERVALS} player={selectedPlayer} disabled={!selectedPlayer} />
       </div>
 

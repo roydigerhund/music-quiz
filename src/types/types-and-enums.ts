@@ -107,6 +107,6 @@ export enum IntervalsEnum {
 export enum QuizVariant {
   NOTES = 'Notes',
   RHYTHM = 'Rhythm',
-  CHORDS = 'Chords',
+  // CHORDS = 'Chords',
   INTERVALS = 'Intervals',
 }

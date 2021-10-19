@@ -56,7 +56,7 @@ const GameResult = () => {
                     </span>
                   </div>
                 </div>
-                <div className="mt-4 grid grid-cols-2 xs:grid-cols-4 gap-1">
+                <div className="mt-4 grid grid-cols-2 xs:grid-cols-3 gap-1">
                   {Object.entries(quizVariants).map(([variantKey, quizVariant]) => {
                     const succeededQuizzes = player.succeededQuizzes.filter(
                       (quiz) => quiz.variant === variantKey,
