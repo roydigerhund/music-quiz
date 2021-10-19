@@ -70,18 +70,8 @@ export enum NotesEnum {
   A = 'A',
   B = 'B',
   H = 'H',
-  A_DUR = 'A-Dur',
-  C_DUR = 'C-Dur',
-  D_DUR = 'D-Dur',
-  E_DUR = 'E-Dur',
-  F_DUR = 'F-Dur',
-  G_DUR = 'G-Dur',
-  A_MOLL = 'a-Moll',
-  C_MOLL = 'c-Moll',
-  D_MOLL = 'd-Moll',
-  E_MOLL = 'e-Moll',
-  F_MOLL = 'f-Moll',
-  G_MOLL = 'g-Moll',
+  DUR = 'Dur',
+  MOLL = 'Moll',
 }
 
 export enum RhythmEnum {
