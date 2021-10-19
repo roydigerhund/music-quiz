@@ -174,7 +174,10 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
         <h1 className="mt-8 h3 sm:mt-12 md:mt-16">
           {quiz.soundFilePath && (
-            <span className="relative block mb-4 mx-auto w-6 h-6 bg-white border-6 border-indigo-600 rounded-full cursor-pointer" onClick={toggleAudio}>
+            <span
+              className="relative block mb-4 mx-auto w-6 h-6 bg-white border-6 border-indigo-600 rounded-full cursor-pointer"
+              onClick={toggleAudio}
+            >
               {audioPlaying ? (
                 <PauseSolid className="absolute -inset-1.5 w-10 h-10 text-pink-500" />
               ) : (
@@ -183,16 +186,23 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
             </span>
           )}
           {quiz.question}
+          {quiz.imagePath && (
+            <div className="mx-auto mt-4 bg-white p-2 rounded-md">
+              <img className="block w-full max-w-md h-auto" src={quiz.imagePath} alt={quiz.question} />
+            </div>
+          )}
         </h1>
         {success === null && (
           <div
             className={`mt-8 sm:mt-12 md:mt-16 grid gap-3 sm:gap-4 select-none ${
-              gridCols[quizOptions[quiz.variant].length]
+              gridCols[quiz.options?.length || quizOptions[quiz.variant].length]
             }`}
           >
-            {quizOptions[quiz.variant].map((option) => (
-              <Draggable key={option.id} id={option.id} option={option} position={OptionPosition.POOL} />
-            ))}
+            {quizOptions[quiz.variant]
+              .filter((option) => (!quiz.options ? true : quiz.options.includes(option.id)))
+              .map((option) => (
+                <Draggable key={option.id} id={option.id} option={option} position={OptionPosition.POOL} />
+              ))}
           </div>
         )}
         <div className={`grid gap-3 sm:gap-4 select-none ${gridCols[quiz.answer.length]} my-8 sm:my-12 md:my-16`}>
