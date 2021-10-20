@@ -629,5 +629,12 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       ],
       variant: QuizVariant.INTERVALS,
     },
+    {
+      id: 'i-2-10',
+      question: 'Baue eine Oktave mit Grundton B',
+      options: ['C', 'CIS', 'DES', 'D', 'DIS', 'ES', 'E', 'F', 'FIS', 'G', 'GIS', 'AS', 'A', 'B', 'H'],
+      answer: ['B', 'B'],
+      variant: QuizVariant.INTERVALS,
+    },
   ],
 };
