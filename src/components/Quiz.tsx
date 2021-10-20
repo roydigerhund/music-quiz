@@ -13,7 +13,6 @@ import {
   ChevronRightSolid,
   CursorClickOutline,
   PauseSolid,
-  PlayOutline,
   PlaySolid,
 } from '@graywolfai/react-heroicons';
 import { useLocation, useNavigate } from '@reach/router';
@@ -21,7 +20,6 @@ import randomInteger from 'random-int';
 import React, { useEffect, useState } from 'react';
 import Confetti from 'react-dom-confetti';
 import { quizOptions, quizzes } from '../data/quizzes';
-import useWindowDimensions from '../hooks/window-dimenions';
 import { OptionPosition, Player, QuizOption, QuizType, QuizVariant } from '../types/types-and-enums';
 import Button from './Button';
 import ButtonSmall from './ButtonSmall';
@@ -162,7 +160,11 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([_, option]) => option?.id);
     const result =
-      userAnswer.length === quiz.answer.length && userAnswer.every((value, index) => value === quiz.answer[index]);
+      userAnswer.length === quiz.answer.length &&
+      (quiz.answer.every((value, index) => value === userAnswer[index]) ||
+        !!quiz.optionalAnswers?.some((optionalAnswer) =>
+          optionalAnswer.every((value, index) => value === userAnswer[index]),
+        ));
     setSuccess(result);
     if (result) {
       addSucceededQuiz(quiz, player);

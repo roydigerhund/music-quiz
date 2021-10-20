@@ -42,6 +42,7 @@ export type QuizType = {
   id: ID;
   question: string;
   answer: OptionID[];
+  optionalAnswers?: OptionID[][];
   options?: OptionID[];
   variant: QuizVariant;
   imagePath?: string;
@@ -99,16 +100,31 @@ export enum ChordsEnum {
 }
 
 export enum IntervalsEnum {
-  PRIM = 'Prim',
-  SEKUND = 'Sekund',
-  TERZ = 'Terz',
-  QUART = 'Quart',
-  QUINT = 'Quint',
-  SEXT = 'Sext',
-  SEPTIM = 'Septim',
-  OKTAV = 'Oktav',
-  HALBTON = 'Halbton',
-  GANZTON = 'Ganzton',
+  PRIME = 'Prime',
+  SEKUNDE = 'Sekunde',
+  KLEINE_TERZ = 'kleine Terz',
+  GROSSE_TERZ = 'große Terz',
+  QUARTE = 'Quarte',
+  QUINTE = 'Quinte',
+  KLEINE_SEXTE = 'kleine Sexte',
+  GROSSE_SEXTE = 'große Sexte',
+  SEPTIME = 'Septime',
+  OKTAVE = 'Oktave',
+  C = 'C',
+  CIS = 'Cis',
+  DES = 'Des',
+  D = 'D',
+  DIS = 'Dis',
+  ES = 'Es',
+  E = 'E',
+  F = 'F',
+  FIS = 'Fis',
+  G = 'G',
+  GIS = 'Gis',
+  AS = 'As',
+  A = 'A',
+  B = 'B',
+  H = 'H',
 }
 
 export enum QuizVariant {
