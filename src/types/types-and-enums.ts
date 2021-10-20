@@ -82,11 +82,11 @@ export enum RhythmEnum {
   NOTE_1_16 = 'Note 1/16',
   TRIOLE_1_4 = 'Triole 1/4',
   TRIOLE_1_8 = 'Triole 1/8',
-  PAUSE_1_1 = 'Pause 1/1',
-  PAUSE_1_2 = 'Pause 1/2',
-  PAUSE_1_4 = 'Pause 1/4',
-  PAUSE_1_8 = 'Pause 1/8',
-  PAUSE_1_16 = 'Pause 1/16',
+  // PAUSE_1_1 = 'Pause 1/1',
+  // PAUSE_1_2 = 'Pause 1/2',
+  // PAUSE_1_4 = 'Pause 1/4',
+  // PAUSE_1_8 = 'Pause 1/8',
+  // PAUSE_1_16 = 'Pause 1/16',
 }
 
 export enum ChordsEnum {
