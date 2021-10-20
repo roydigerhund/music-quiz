@@ -172,7 +172,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/A-Dur.png',
     },
-
     {
       id: 'n-2-2',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -181,7 +180,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/a-Moll.png',
     },
-
     {
       id: 'n-2-3',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -190,7 +188,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/C-Dur.png',
     },
-
     {
       id: 'n-2-4',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -199,7 +196,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/c-Moll.png',
     },
-
     {
       id: 'n-2-5',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -208,7 +204,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/D-Dur.png',
     },
-
     {
       id: 'n-2-6',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -217,7 +212,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/d-Moll.png',
     },
-
     {
       id: 'n-2-7',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -226,7 +220,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/E-Dur.png',
     },
-
     {
       id: 'n-2-8',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -235,7 +228,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/e-Moll.png',
     },
-
     {
       id: 'n-2-9',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -244,7 +236,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/F-Dur.png',
     },
-
     {
       id: 'n-2-10',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -253,7 +244,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/f-Moll.png',
     },
-
     {
       id: 'n-2-11',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -262,7 +252,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.NOTES,
       imagePath: '/images/notes/G-Dur.png',
     },
-
     {
       id: 'n-2-12',
       question: 'Benenne die vorgegebene Tonleiter',
@@ -278,84 +267,84 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       question: 'Notiere den gehörten Rhythmus',
       answer: ['NOTE_1_4', 'NOTE_1_8', 'NOTE_1_8', 'NOTE_1_4', 'NOTE_1_4'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/12.m4a',
+      soundFilePath: '/sounds/rhythm/1.m4a',
     },
     {
       id: 'r-1-2',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['NOTE_1_8', 'NOTE_1_4', 'NOTE_1_8', 'NOTE_1_2'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/11.m4a',
+      soundFilePath: '/sounds/rhythm/2.m4a',
     },
     {
       id: 'r-1-3',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['TRIOLE_1_8', 'NOTE_1_4', 'NOTE_1_8', 'NOTE_1_8', 'NOTE_1_4'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/10.m4a',
+      soundFilePath: '/sounds/rhythm/3.m4a',
     },
     {
       id: 'r-1-4',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['NOTE_1_4', 'NOTE_1_8', 'NOTE_1_8', 'NOTE_1_8', 'NOTE_1_8', 'NOTE_1_4'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/9.m4a',
+      soundFilePath: '/sounds/rhythm/4.m4a',
     },
     {
       id: 'r-1-5',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['NOTE_1_8', 'NOTE_1_8', 'NOTE_1_8', 'NOTE_1_4', 'NOTE_1_8', 'NOTE_1_8', 'NOTE_1_8'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/8.m4a',
+      soundFilePath: '/sounds/rhythm/5.m4a',
     },
     {
       id: 'r-1-6',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['NOTE_1_2', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_4'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/7.m4a',
+      soundFilePath: '/sounds/rhythm/6.m4a',
     },
     {
       id: 'r-1-7',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['NOTE_1_4', 'NOTE_1_8', 'NOTE_1_8', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_4'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/6.m4a',
+      soundFilePath: '/sounds/rhythm/7.m4a',
     },
     {
       id: 'r-1-8',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['NOTE_1_4', 'NOTE_1_4', 'NOTE_1_4', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_16'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/5.m4a',
+      soundFilePath: '/sounds/rhythm/8.m4a',
     },
     {
       id: 'r-1-9',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['NOTE_1_16', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_4', 'NOTE_1_8', 'NOTE_1_8', 'NOTE_1_4'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/4.m4a',
+      soundFilePath: '/sounds/rhythm/9.m4a',
     },
     {
       id: 'r-1-10',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['NOTE_1_4', 'NOTE_1_8', 'NOTE_1_8', 'NOTE_1_4', 'NOTE_1_8', 'NOTE_1_8'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/3.m4a',
+      soundFilePath: '/sounds/rhythm/10.m4a',
     },
     {
       id: 'r-1-11',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['TRIOLE_1_4', 'NOTE_1_4', 'NOTE_1_4', 'NOTE_1_2'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/2.m4a',
+      soundFilePath: '/sounds/rhythm/11.m4a',
     },
     {
       id: 'r-1-12',
       question: 'Notiere den gehörten Rhythmus',
       answer: ['NOTE_1_16', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_16', 'NOTE_1_4', 'TRIOLE_1_4', 'NOTE_1_4'],
       variant: QuizVariant.RHYTHM,
-      soundFilePath: '/sounds/rhythm/1.m4a',
+      soundFilePath: '/sounds/rhythm/12.m4a',
     },
   ],
   // [QuizVariant.CHORDS]: [
@@ -557,7 +546,6 @@ export const quizzes: Record<QuizVariant, QuizType[]> = {
       variant: QuizVariant.INTERVALS,
       imagePath: '/images/intervals/gr-Sexte.png',
     },
-
     {
       id: 'i-2-1',
       question: 'Baue eine Prime mit Grundton F',
