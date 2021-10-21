@@ -49,6 +49,25 @@ const gridCols: Record<number, string> = {
   15: 'grid-cols-5',
 };
 
+const largeGridCols: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-2',
+  3: 'grid-cols-3',
+  4: 'grid-cols-2 sm:grid-cols-4',
+  5: 'grid-cols-3',
+  6: 'grid-cols-3',
+  7: 'grid-cols-3 sm:grid-cols-4',
+  8: 'grid-cols-3 sm:grid-cols-4',
+  9: 'grid-cols-3',
+  10: 'grid-cols-3 sm:grid-cols-4',
+  11: 'grid-cols-3 sm:grid-cols-4',
+  12: 'grid-cols-3 sm:grid-cols-4',
+  13: 'grid-cols-3 sm:grid-cols-4',
+  14: 'grid-cols-3 sm:grid-cols-4',
+  15: 'grid-cols-3 sm:grid-cols-4',
+  16: 'grid-cols-3 sm:grid-cols-4',
+};
+
 const confettiConfig = {
   angle: 90,
   spread: 90,
@@ -198,7 +217,11 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
         {/* IF ONLY ONE ANSWER FIELD IS NEEDED */}
         {quiz.answer.length === 1 && (
           <>
-            <div className={`my-8 sm:my-12 md:my-16 grid gap-3 sm:gap-4 select-none ${gridCols[quiz.options.length]}`}>
+            <div
+              className={`my-8 sm:my-12 md:my-16 grid gap-3 sm:gap-4 select-none ${
+                (quiz.largeTiles ? largeGridCols : gridCols)[quiz.options.length]
+              }`}
+            >
               {quizOptions
                 .filter((option) => (!quiz.options ? true : quiz.options.includes(option.id)))
                 .map((option, index) => (
@@ -208,6 +231,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
                     onClick={(opt) => setDrops(!drops[`click-${index}`] ? { [`click-${index}`]: opt } : {})}
                     selected={Object.keys(drops).length === 0 ? undefined : !!drops[`click-${index}`]}
                     disabled={success !== null}
+                    largeTiles={quiz.largeTiles}
                   />
                 ))}
             </div>

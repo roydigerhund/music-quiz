@@ -47,6 +47,7 @@ export type QuizType = {
   variant: QuizVariant;
   imagePath?: string;
   soundFilePath?: string;
+  largeTiles?: boolean;
 };
 
 export enum OptionPosition {
