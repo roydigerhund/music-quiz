@@ -33,9 +33,9 @@ const QuizSelection = () => {
             <div
               key={player.id}
               className={classNames(
-                'flex-1 flex items-center m-2 px-4 pb-px font-medium text-indigo-700 rounded-lg cursor-pointer select-none',
+                'flex-1 flex items-center m-2 pb-px font-medium text-indigo-700 rounded-lg cursor-pointer select-none',
                 'transition-all',
-                !!selectedPlayer ? 'h-12 justify-between' : 'h-24 justify-center',
+                !!selectedPlayer ? 'h-12 justify-between px-4' : 'h-24 justify-center px-8',
                 selectedPlayer?.id === player.id ? 'bg-white' : 'bg-indigo-200',
               )}
               style={{
