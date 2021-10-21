@@ -43,7 +43,7 @@ export type QuizType = {
   question: string;
   answer: OptionID[];
   optionalAnswers?: OptionID[][];
-  options?: OptionID[];
+  options: OptionID[];
   variant: QuizVariant;
   imagePath?: string;
   soundFilePath?: string;
@@ -110,26 +110,10 @@ export enum IntervalsEnum {
   GROSSE_SEXTE = 'große Sexte',
   SEPTIME = 'Septime',
   OKTAVE = 'Oktave',
-  C = 'C',
-  CIS = 'Cis',
-  DES = 'Des',
-  D = 'D',
-  DIS = 'Dis',
-  ES = 'Es',
-  E = 'E',
-  F = 'F',
-  FIS = 'Fis',
-  G = 'G',
-  GIS = 'Gis',
-  AS = 'As',
-  A = 'A',
-  B = 'B',
-  H = 'H',
 }
 
 export enum QuizVariant {
   NOTES = 'Notes',
   RHYTHM = 'Rhythm',
-  // CHORDS = 'Chords',
   INTERVALS = 'Intervals',
 }

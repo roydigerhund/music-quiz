@@ -197,10 +197,10 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
         {success === null && (
           <div
             className={`mt-8 sm:mt-12 md:mt-16 grid gap-3 sm:gap-4 select-none ${
-              gridCols[quiz.options?.length || quizOptions[quiz.variant].length]
+              gridCols[quiz.options.length]
             }`}
           >
-            {quizOptions[quiz.variant]
+            {quizOptions
               .filter((option) => (!quiz.options ? true : quiz.options.includes(option.id)))
               .map((option) => (
                 <Draggable key={option.id} id={option.id} option={option} position={OptionPosition.POOL} />
