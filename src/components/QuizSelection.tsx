@@ -36,7 +36,8 @@ const QuizSelection = () => {
                 'flex-1 flex items-center m-2 pb-px font-medium text-indigo-700 rounded-lg cursor-pointer select-none',
                 'ease-in-out duration-150',
                 !!selectedPlayer ? 'h-12 justify-between px-4' : 'h-24 justify-center px-8',
-                selectedPlayer?.id === player.id ? 'bg-white' : 'bg-indigo-200',
+                (!selectedPlayer || selectedPlayer?.id === player.id) ? 'bg-white' : 'bg-indigo-200',
+                selectedPlayer?.id === player.id && 'ring-4 ring-indigo-300',
               )}
               style={{
                 flexBasis: 1,
