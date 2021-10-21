@@ -177,7 +177,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
         <h1 className="mt-8 h3 sm:mt-12 md:mt-16">
           {quiz.soundFilePath && (
             <span
-              className="relative block mb-4 mx-auto w-6 h-6 bg-white border-6 border-indigo-600 rounded-full cursor-pointer"
+              className="relative block w-6 h-6 mx-auto mb-4 bg-white border-indigo-600 rounded-full cursor-pointer border-6"
               onClick={toggleAudio}
             >
               {audioPlaying ? (
@@ -189,8 +189,8 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
           )}
           {quiz.question}
           {quiz.imagePath && (
-            <div className="mx-auto mt-4 bg-white p-2 rounded-md">
-              <img className="block w-full max-w-md h-auto" src={quiz.imagePath} alt={quiz.question} />
+            <div className="p-2 mx-auto mt-4 bg-white rounded-md">
+              <img className="block w-full h-auto max-w-md" src={quiz.imagePath} alt={quiz.question} />
             </div>
           )}
         </h1>
@@ -243,7 +243,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
           <Confetti active={!!success} config={confettiConfig} />
         </div>
         {success === true && (
-          <div className="p-4 bg-white rounded-md animate__tada relative z-0">
+          <div className="relative z-0 p-4 bg-white rounded-md animate__tada">
             <div className="flex items-center justify-center">
               <div className="flex-shrink-0 text-lg">🎉</div>
               <div className="ml-3">
@@ -260,7 +260,7 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
               <div className="flex-shrink-0 text-lg">😔</div>
               <div className="ml-3">
                 <p className="text-sm font-semibold tracking-wider text-gray-600 uppercase">
-                  Leider war deine Antwort falsch!
+                  Leider falsch, nächstes mal klappt es!
                 </p>
               </div>
             </div>
