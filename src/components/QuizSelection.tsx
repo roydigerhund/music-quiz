@@ -34,12 +34,13 @@ const QuizSelection = () => {
               key={player.id}
               className={classNames(
                 'flex-1 flex items-center m-2 pb-px font-medium text-indigo-700 rounded-lg cursor-pointer select-none',
-                'transition-all',
+                'ease-in-out duration-150',
                 !!selectedPlayer ? 'h-12 justify-between px-4' : 'h-24 justify-center px-8',
                 selectedPlayer?.id === player.id ? 'bg-white' : 'bg-indigo-200',
               )}
               style={{
                 flexBasis: 1,
+                transitionProperty: 'height',
               }}
               onClick={() => {
                 setSelectedPlayer(selectedPlayer?.id === player.id ? undefined : player);
