@@ -188,12 +188,12 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
             </span>
           )}
           {quiz.question}
-          {quiz.imagePath && (
-            <div className="p-2 mx-auto mt-4 bg-white rounded-md">
-              <img className="block w-full h-auto max-w-md" src={quiz.imagePath} alt={quiz.question} />
-            </div>
-          )}
         </h1>
+        {quiz.imagePath && (
+          <div className="p-2 mx-auto mt-4 bg-white rounded-md">
+            <img className="block w-auto h-auto max-h-20 max-w-md" src={quiz.imagePath} alt={quiz.question} />
+          </div>
+        )}
         {success === null && (
           <div
             className={`mt-8 sm:mt-12 md:mt-16 grid gap-3 sm:gap-4 select-none ${
