@@ -23,6 +23,7 @@ import { quizOptions, quizzes } from '../data/quizzes';
 import { OptionPosition, Player, QuizOption, QuizType, QuizVariant } from '../types/types-and-enums';
 import Button from './Button';
 import ButtonSmall from './ButtonSmall';
+import Clickable from './Clickable';
 import { useGame } from './contexts/GameContext';
 import Draggable from './Draggable';
 import Droppable from './Droppable';
@@ -194,43 +195,64 @@ const Quiz = ({ variant }: { variant: QuizVariant }) => {
             <img className="block w-auto h-auto max-h-20 max-w-md" src={quiz.imagePath} alt={quiz.question} />
           </div>
         )}
-        {success === null && (
-          <div
-            className={`mt-8 sm:mt-12 md:mt-16 grid gap-3 sm:gap-4 select-none ${
-              gridCols[quiz.options.length]
-            }`}
-          >
-            {quizOptions
-              .filter((option) => (!quiz.options ? true : quiz.options.includes(option.id)))
-              .map((option) => (
-                <Draggable key={option.id} id={option.id} option={option} position={OptionPosition.POOL} />
-              ))}
-          </div>
+        {/* IF ONLY ONE ANSWER FIELD IS NEEDED */}
+        {quiz.answer.length === 1 && (
+          <>
+            <div className={`my-8 sm:my-12 md:my-16 grid gap-3 sm:gap-4 select-none ${gridCols[quiz.options.length]}`}>
+              {quizOptions
+                .filter((option) => (!quiz.options ? true : quiz.options.includes(option.id)))
+                .map((option, index) => (
+                  <Clickable
+                    key={option.id}
+                    option={option}
+                    onClick={(opt) => setDrops(!drops[`click-${index}`] ? { [`click-${index}`]: opt } : {})}
+                    selected={Object.keys(drops).length === 0 ? undefined : !!drops[`click-${index}`]}
+                    disabled={success !== null}
+                  />
+                ))}
+            </div>
+          </>
         )}
-        <div className={`grid gap-3 sm:gap-4 select-none ${gridCols[quiz.answer.length]} my-8 sm:my-12 md:my-16`}>
-          {Array(quiz.answer.length)
-            .fill('')
-            .map((_, index) => {
-              const dropId = `drop-${index}`;
-              const childOption = drops[dropId];
+        {/* IF MORE THAN ONE ANSWER FIELD IS NEEDED */}
+        {quiz.answer.length > 1 && (
+          <>
+            {success === null && (
+              <div
+                className={`mt-8 sm:mt-12 md:mt-16 grid gap-3 sm:gap-4 select-none ${gridCols[quiz.options.length]}`}
+              >
+                {quizOptions
+                  .filter((option) => (!quiz.options ? true : quiz.options.includes(option.id)))
+                  .map((option) => (
+                    <Draggable key={option.id} id={option.id} option={option} position={OptionPosition.POOL} />
+                  ))}
+              </div>
+            )}
+            <div className={`grid gap-3 sm:gap-4 select-none ${gridCols[quiz.answer.length]} my-8 sm:my-12 md:my-16`}>
+              {Array(quiz.answer.length)
+                .fill('')
+                .map((_, index) => {
+                  const dropId = `drop-${index}`;
+                  const childOption = drops[dropId];
 
-              return (
-                <Droppable key={dropId} id={dropId} index={index}>
-                  {childOption && (
-                    <Draggable
-                      id={`${dropId}__${childOption.id}`}
-                      option={childOption}
-                      position={OptionPosition.ANSWER}
-                      disabled={success !== null}
-                    />
-                  )}
-                </Droppable>
-              );
-            })}
-        </div>
-        <DragOverlay dropAnimation={null} zIndex={100}>
-          {activeOption ? <OptionItem option={activeOption} position={OptionPosition.DRAGGING} /> : null}
-        </DragOverlay>
+                  return (
+                    <Droppable key={dropId} id={dropId} index={index}>
+                      {childOption && (
+                        <Draggable
+                          id={`${dropId}__${childOption.id}`}
+                          option={childOption}
+                          position={OptionPosition.ANSWER}
+                          disabled={success !== null}
+                        />
+                      )}
+                    </Droppable>
+                  );
+                })}
+            </div>
+            <DragOverlay dropAnimation={null} zIndex={100}>
+              {activeOption ? <OptionItem option={activeOption} position={OptionPosition.DRAGGING} /> : null}
+            </DragOverlay>
+          </>
+        )}
         {success === null && (
           <Button
             onClick={checkAnswer}

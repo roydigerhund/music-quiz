@@ -22,7 +22,7 @@ const Draggable = ({ id, option, position, disabled }: Props) => {
   return (
     <div
       className={classNames(
-        'rounded-2xl h-12 w-12 xxs:h-14 xxs:w-14 xs:h-16 xs:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 bg-indigo-700',
+        'rounded-xl h-12 w-12 xxs:h-14 xxs:w-14 xs:h-16 xs:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 bg-indigo-700',
       )}
     >
       <div
