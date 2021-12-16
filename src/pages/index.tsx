@@ -26,7 +26,7 @@ const IndexPage = () => {
             <p className="mt-4 p md:mt-8">Mit viel Liebe für euch gemacht von eurem Lehrer Herr Schmid.</p>
           </div>
           <Button onClick={setupGame} label="Neues Spiel" leadingIcon={MusicNoteOutline} />
-          <p className="mt-6 text-xs text-indigo-300">V 1.0.4</p>
+          <p className="mt-6 text-xs text-indigo-300">V 1.0.5</p>
         </div>
       )}
     </GamePage>

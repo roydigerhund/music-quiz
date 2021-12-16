@@ -105,10 +105,12 @@ export enum IntervalsEnum {
   SEKUNDE = 'Sekunde',
   KLEINE_TERZ = 'kleine Terz',
   GROSSE_TERZ = 'große Terz',
+  TERZ = 'Terz',
   QUARTE = 'Quarte',
   QUINTE = 'Quinte',
   KLEINE_SEXTE = 'kleine Sexte',
   GROSSE_SEXTE = 'große Sexte',
+  SEXTE = 'Sexte',
   SEPTIME = 'Septime',
   OKTAVE = 'Oktave',
 }
