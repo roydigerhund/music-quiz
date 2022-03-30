@@ -6,3 +6,4 @@ tmp
 src/dist.css
 artifacts/**/*
 artifacts
+yarn-error.log
